@@ -6,7 +6,7 @@
     "Thobias Bergström <kog13tbe@student.lu.se>"
   ],
   "description": "An angular.js-based front end for choice blindness experiments",
-  "main": "index.html",
+  "main": "app/index.html",
   "keywords": [
     "choice",
     "blindness",
