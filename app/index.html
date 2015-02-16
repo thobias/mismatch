@@ -1,0 +1,72 @@
+<!DOCTYPE html xmlns:ng="http://angularjs.org">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Mismatch</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+
+        <!--[if lte IE 8]>
+          <script>
+            document.createElement('ng-include');
+            document.createElement('ng-pluralize');
+            document.createElement('ng-view');
+            document.createElement('ng-switch');
+          </script>
+        <![endif]-->
+
+        <!-- build:css /styles/styles.css -->
+        <link rel="stylesheet" href="/styles/normalize.css"/>
+        <link rel="stylesheet" href="/styles/main.css"/>
+        <!-- endbuild -->
+
+    </head>
+    <body id="ng-app" ng-app="mismatchApp">
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+        <!--[if IE 7]>
+          <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js"></script>
+        <![endif]-->
+
+        <div class="l-header">
+            <h1>Mismatch</h1>
+        </div>
+
+        <div class="l-container" ng-view>
+
+        </div>
+
+        <script src="/bower_components/jquery/jquery.js"></script>
+        <script src="/bower_components/angular/angular.js"></script>
+
+        <!-- build:js /scripts/scripts.js -->
+        <script src="/scripts/app.js"></script>
+    <!--
+        <script src="/scripts/filters/*.js"></script>
+
+        <script src="/scripts/services/*.js"></script>
+
+        <script src="/scripts/resources/*.js"></script>
+
+        <script src="/external/*.js"></script>
+
+        <script src="/bower_components/*/*.js"></script>
+
+        <script src="/scripts/directives/*.js"></script>
+    -->
+
+        <!-- endbuild -->
+    </body>
+</html>
