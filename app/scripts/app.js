@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helmsmanApp',[])
+angular.module('mismatchApp',[])
   .run(['$rootScope', function($rootScope) {
 
   }
