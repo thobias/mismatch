@@ -1,6 +1,7 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    webserver = require('gulp-webserver'),
+    jshint = require('gulp-jshint');
 
-var webserver = require('gulp-webserver');
 
 gulp.task('server', function() {
   gulp.src('app')
@@ -11,3 +12,9 @@ gulp.task('server', function() {
       port: 8080
     }));
 });
+
+gulp.task('lint', function() {
+  return gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+})

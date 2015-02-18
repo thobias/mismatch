@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('mismatchApp', ['ngRoute', 'mismatchControllers'])
+angular.module('mismatchControllers', []);
+angular.module('mismatchServices', []);
+
+angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServices'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider.
       when('/start', {
@@ -9,10 +12,6 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers'])
       }).
       otherwise({
         redirectTo: '/start'
-      })
+      });
     }
-  ])
-  .run(['$rootScope', function($rootScope) {
-
-  }
 ]);

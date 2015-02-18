@@ -1,6 +1,6 @@
-var mismatchControllers = angular.module('mismatchControllers', []);
+'use strict';
 
-mismatchControllers.controller('StartCtrl', ['$scope', function ($scope) {
+angular.module('mismatchControllers').controller('StartCtrl', ['$scope', function ($scope) {
 
   var mousePosition = {'x': 0, 'y': 0};
 
@@ -31,7 +31,7 @@ mismatchControllers.controller('StartCtrl', ['$scope', function ($scope) {
         updatingFrequency = deltaSum/deltaSamples;
 
         console.log('Updating frequency set to ' + updatingFrequency + ' ms (' + 1000/updatingFrequency + ' hz)');
-        alert(1000/updatingFrequency + ' hz');
+        //alert(1000/updatingFrequency + ' hz');
       }
 
     };
@@ -53,7 +53,7 @@ mismatchControllers.controller('StartCtrl', ['$scope', function ($scope) {
 
     $scope.stopTracking = function() {
       console.log(trackingData);
-      clearInterval(tracking)
+      clearInterval(tracking);
       document.onmousemove = null;
     };
 
