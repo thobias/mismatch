@@ -7,4 +7,64 @@ body {
 
 h1 {
   margin: 0;
+  text-align: center;
 }
+  h2 {
+    text-align: center
+  }
+  h3 {
+    text-align: center;
+  }
+
+
+.precise-button {
+  border-radius: 100%;
+  border: 1px solid red;
+  outline: none;
+  height: 2em;
+  width: 2em;
+  display: block;
+  text-align: center;
+  background-color: #fff;
+  margin: 0 auto;
+}
+  .precise-button:hover {
+    background-color: red;
+  }
+  .precise-button:active {
+    background-color: #333;
+  }
+
+.face {
+  display: block;
+  border: 1px dashed #ccc;
+  border-radius: 1em;
+  height: 14em;
+  width: 10em;
+  position: fixed;
+  cursor: pointer;
+  -webkit-user-select:none;
+  user-select: none;
+}
+  .face:hover {
+    border-style: solid;
+  }
+  .face:active {
+    border-color: red;
+  }
+  .face-right {
+    top: 60px;
+    right: 20px;
+  }
+  .face-left {
+    top: 60px;
+    left: 20px;
+  }
+
+.controls {
+  position: fixed;
+  bottom: 40px;
+  left:0;
+  right: 0;
+}
+
