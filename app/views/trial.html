@@ -1,0 +1,15 @@
+<h1>Click on the most attractive face</h1>
+
+<div ng-click="stopTracking()" class="face face-left">
+  <img class="face-image" ng-src="{{experiment.trials[trial].image1}}">
+</div>
+
+<div ng-click="stopTracking()" class="face face-right">
+  <img class="face-image" ng-src="{{experiment.trials[trial].image2}}">
+</div>
+
+<div class="controls">
+  <h3>Click here to start</h3>
+  <button ng-click="startTracking()" class="precise-button"></button>
+  <button countdownButton time="2000" onComplete="startTracking()" class="countdownButton"></button>
+</div>

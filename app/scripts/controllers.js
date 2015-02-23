@@ -1,63 +1,51 @@
 'use strict';
 
-angular.module('mismatchControllers').controller('StartCtrl', ['$scope', function ($scope) {
+angular.module('mismatchControllers')
+  .controller('StartCtrl', ['$scope', '$rootScope', 'experiment', function($scope, $rootScope, experiment) {
+    // One resource with user data, the trials and experiment data (when finished)
+    $rootScope.experiment = experiment;
+    // Calibration
+    // User metadata
+    // First trials
+    // Experiment #1
+    // Experiment #2
+    // Outro
+  }])
+  .controller('TrialCtrl', ['$scope', '$rootScope', '$location', 'mouseTracking', function($scope, $rootScope, $location, mouseTracking) {
+    $scope.experiment = $rootScope.experiment;
+    $scope.trial = 0;
 
-  var mousePosition = {'x': 0, 'y': 0};
+    if($scope.experiment === undefined) {
+      $location.path('/start');
+    }
 
-  // In ms
-  var updatingFrequency = 17;
+    // Get data
+    // Set images
+    // Flipping of images
+    // Is manipulated?
+    // Goto next trial
 
-  $scope.calibration = function() {
-    var delta = 0,
-        deltaSum = 0,
-        deltaSamples = 0;
-
-    document.onmousemove = function(event) {
-      delta = window.performance.now() - delta;
-
-      if(delta < 1000) {
-        deltaSum += delta;
-
-        mousePosition.x = event.clientX;
-        mousePosition.y = event.clientY;
-
-        delta = window.performance.now();
-        deltaSamples++;
-      }
-
-      if(deltaSamples >= 50) {
-        document.onmousemove = null;
-
-        updatingFrequency = deltaSum/deltaSamples;
-
-        console.log('Updating frequency set to ' + updatingFrequency + ' ms (' + 1000/updatingFrequency + ' hz)');
-        //alert(1000/updatingFrequency + ' hz');
-      }
-
+    var stopTracking = function() {
+      var results = mouseTracking.stopTracking();
+      $scope.experiment.data[$scope.trial] = angular.copy(results);
+      $scope.trial++;
+      console.log($scope.experiment);
     };
 
-  };
+    $scope.startTracking = mouseTracking.startTracking;
+    $scope.stopTracking = stopTracking;
 
-  $scope.startTracking = function() {
-    var tracking,
-        trackingData = '';
+  }])
+  .controller('CalibrationCtrl', ['$scope', '$location', 'mouseTracking', function($scope, $location, mouseTracking) {
 
-    document.onmousemove = function(event) {
-      mousePosition.x = event.clientX;
-      mousePosition.y = event.clientY;
+    var startCalibration = function() {
+      mouseTracking.calibration().then(function(updatingFrequency) {
+        mouseTracking.setUpdatingFrequency(updatingFrequency);
+        console.log('Updating frequency set to ' + mouseTracking.updatingFrequency + ' ms (' + 1000/mouseTracking.updatingFrequency + ' hz)');
+        $location.path('/trial');
+      });
     };
 
-    tracking = setInterval(function () {
-     trackingData += mousePosition.x + ', ' + mousePosition.y + ', ' + window.performance.now() + '\n';
-    }, updatingFrequency);
+    $scope.startCalibration = startCalibration;
 
-    $scope.stopTracking = function() {
-      console.log(trackingData);
-      clearInterval(tracking);
-      document.onmousemove = null;
-    };
-
-  };
-
-
-}]);
+  }]);
