@@ -1,11 +1,11 @@
 <h1>Click on the most attractive face</h1>
 
 <div ng-click="stopTracking()" class="face face-left">
-  <img class="face-image" ng-src="{{experiment.trials[trial].image1}}">
+  <img class="face-image" ng-src="{{trial.images[0].url}}">
 </div>
 
 <div ng-click="stopTracking()" class="face face-right">
-  <img class="face-image" ng-src="{{experiment.trials[trial].image2}}">
+  <img class="face-image" ng-src="{{trial.images[1].url}}">
 </div>
 
 <div class="controls">

@@ -11,9 +11,16 @@ angular.module('mismatchControllers')
     // Experiment #2
     // Outro
   }])
-  .controller('TrialCtrl', ['$scope', '$rootScope', '$location', 'mouseTracking', function($scope, $rootScope, $location, mouseTracking) {
+  .controller('TrialCtrl', ['$scope', '$rootScope', '$location', 'trial', function($scope, $rootScope, $location, trial) {
     $scope.experiment = $rootScope.experiment;
-    $scope.trial = 0;
+    $scope.currentTrialIndex = 0;
+
+    $scope.trial = trial({
+      'id': $scope.experiment.trials[ $scope.currentTrialIndex ].id,
+      'image1': $scope.experiment.trials[ $scope.currentTrialIndex ].images[0],
+      'image2': $scope.experiment.trials[ $scope.currentTrialIndex ].images[1],
+      'manipulated': false
+    });
 
     if($scope.experiment === undefined) {
       $location.path('/start');
@@ -23,17 +30,33 @@ angular.module('mismatchControllers')
     // Set images
     // Flipping of images
     // Is manipulated?
+    // Show likert scale for judgement
     // Goto next trial
 
-    var stopTracking = function() {
-      var results = mouseTracking.stopTracking();
-      $scope.experiment.data[$scope.trial] = angular.copy(results);
-      $scope.trial++;
-      console.log($scope.experiment);
+    // Click
+    // Wait
+    // FLip images
+    // Wait 2s
+    // Choice is made
+    // Flip images
+    // Show scale
+    // Click scale
+    // Show chosen (or manipulated) image
+    // Wait 2s?
+    // Show reasons
+    // Choose reason
+    // Next trial
+
+
+    var startTrial = function() {
+
+      $scope.trial.start();
+
     };
 
-    $scope.startTracking = mouseTracking.startTracking;
-    $scope.stopTracking = stopTracking;
+
+    $scope.startTrial = startTrial;
+    //$scope.stopTracking = stopTracking;
 
   }])
   .controller('CalibrationCtrl', ['$scope', '$location', 'mouseTracking', function($scope, $location, mouseTracking) {
