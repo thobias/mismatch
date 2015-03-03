@@ -17,7 +17,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
           'replace': false
         }
       ],
-      mainpulate: spec.manipulate || false,
+      manipulated: spec.manipulated || false,
       showScale: false,
       showStart: true,
       showFeedback: false,
@@ -42,9 +42,10 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         $timeout(function() {
           trial.toggleImages(true);
           trial.data.timing.start = window.performance.now();
-          trial.waiting = 0;
+          trial.waiting = 2000;
           // wait 2000ms
           $timeout(function() {
+            trial.waiting = 0;
             trial.toggleImages(false);
           }, 2000);
         }, 500);
@@ -78,6 +79,11 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
 
         $timeout(function() {
           if( !trial.manipulated ) {
+            trial.showImage( trial.data.choice );
+          }
+          else {
+            trial.images[ trial.data.choice ].url = trial.images[ (trial.data.choice === 1 ? 0 : 1) ].url;
+            console.log(trial);
             trial.showImage( trial.data.choice );
           }
 

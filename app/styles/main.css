@@ -102,8 +102,8 @@ button {
     left: 0;
   }
   .face-image {
-    width: 200px;
-    height: 300px;
+    width: 221px;
+    height: 274px;
   }
 
 .is-hidden {
@@ -122,8 +122,8 @@ button {
     }
 
   .flip-container, .front, .back {
-    width: 200px;
-    height: 300px;
+    width: 221px;
+    height: 274px;
   }
 
   /* flip speed goes here */

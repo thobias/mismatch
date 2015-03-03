@@ -23,7 +23,7 @@ angular.module('mismatchControllers')
         'id': $scope.experiment.trials[ index ].id,
         'image1': $scope.experiment.trials[ index ].image1,
         'image2': $scope.experiment.trials[ index ].image2,
-        'manipulated': false
+        'manipulated': $scope.experiment.trials[ index ].manipulated
       });
     };
 
