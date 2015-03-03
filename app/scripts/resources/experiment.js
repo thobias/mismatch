@@ -6,6 +6,7 @@ angular.module('mismatchResources').factory('experiment', [function() {
       'sex': 'm',
       'age': 25,
       'device': 'trackpad',
+      'devicePosition': 'right',
       'hand': 'right'
     },
     'trials': [

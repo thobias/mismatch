@@ -1,15 +1,65 @@
-<h1>Click on the most attractive face</h1>
 
-<div ng-click="stopTracking()" class="face face-left">
-  <img class="face-image" ng-src="{{trial.images[0].url}}">
+<h2 ng-show="trial.waiting > 0">Wait ({{trial.waiting}})</h2>
+
+<div ng-click="trial.choiceMade(0)" ng-class="{'is-flipped': !trial.images[0].show, 'replace': trial.images[0].replace, 'chosen': trial.data.choice == 0 && !trial.images[0].replace}" class="flip-container face face-left">
+  <div class="flipper">
+    <div class="front">
+      <img class="face-image" ng-src="{{trial.images[0].url}}">
+    </div>
+    <div class="back">
+     <img class="face-image face-back" src="https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg">
+    </div>
+  </div>
 </div>
 
-<div ng-click="stopTracking()" class="face face-right">
-  <img class="face-image" ng-src="{{trial.images[1].url}}">
+<div ng-click="trial.choiceMade(1)" ng-class="{'is-flipped': !trial.images[1].show, 'replace': trial.images[1].replace, 'chosen': trial.data.choice == 1 && !trial.images[1].replace}" class="flip-container face face-right">
+  <div class="flipper">
+    <div class="front">
+      <img class="face-image" ng-src="{{trial.images[1].url}}">
+    </div>
+    <div class="back">
+     <img class="face-image face-back" src="https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg">
+    </div>
+  </div>
 </div>
 
-<div class="controls">
+<div ng-show="trial.showStart" class="controls">
   <h3>Click here to start</h3>
-  <button ng-click="startTracking()" class="precise-button"></button>
-  <button countdownButton time="2000" onComplete="startTracking()" class="countdownButton"></button>
+  <button ng-click="startTrial()" class="precise-button"></button>
+  <!-- <button countdownButton time="2000" onComplete="startTracking()" class="countdownButton"></button> -->
 </div>
+
+<div ng-show="trial.showScale" class="controls">
+  <h3>How sure are you?</h3>
+  <!--<input type="range" min="1" max="7" name="rating">-->
+  <div class="l-center">
+    <label for="rating1">1</label>
+    <button class="radio-button" ng-click="trial.rate(1)" id="rating1"></button>
+    <label for="rating2">2</label>
+    <button class="radio-button" ng-click="trial.rate(2)" id="rating2"></button>
+    <label for="rating3">3</label>
+    <button class="radio-button" ng-click="trial.rate(3)" id="rating3"></button>
+    <label for="rating4">4</label>
+    <button class="radio-button" ng-click="trial.rate(4)" id="rating4"></button>
+    <label for="rating5">5</label>
+    <button class="radio-button" ng-click="trial.rate(5)" id="rating5"></button>
+    <label for="rating6">6</label>
+    <button class="radio-button" ng-click="trial.rate(6)" id="rating6"></button>
+    <label for="rating7">7</label>
+    <button class="radio-button" ng-click="trial.rate(7)" id="rating7"></button>
+  </div>
+</div>
+
+<div ng-show="trial.showFeedback" class="controls">
+  <h3>You chose the face above. Why did you choose this face?</h3>
+  <div class="l-center">
+    <button ng-click="trial.feedback('mouth')">Mouth</button>
+    <button ng-click="trial.feedback('eyes')">Eyes</button>
+    <button ng-click="trial.feedback('nose')">Nose</button>
+    <button ng-click="trial.feedback('proportion')">Proportions</button>
+    <button ng-click="trial.feedback('skin')">Skin</button>
+    <button ng-click="trial.feedback('shape')">Shape</button>
+    <button class="button-other" ng-click="trial.feedback('other')">I actually prefer the other face</button>
+  </div>
+</div>
+

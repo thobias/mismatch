@@ -13,14 +13,23 @@ angular.module('mismatchControllers')
   }])
   .controller('TrialCtrl', ['$scope', '$rootScope', '$location', 'trial', function($scope, $rootScope, $location, trial) {
     $scope.experiment = $rootScope.experiment;
+
+    if(!$scope.experiment) {
+      $location.path('/start');
+    }
+
+    var getTrial = function(index) {
+      return trial({
+        'id': $scope.experiment.trials[ index ].id,
+        'image1': $scope.experiment.trials[ index ].image1,
+        'image2': $scope.experiment.trials[ index ].image2,
+        'manipulated': false
+      });
+    };
+
     $scope.currentTrialIndex = 0;
 
-    $scope.trial = trial({
-      'id': $scope.experiment.trials[ $scope.currentTrialIndex ].id,
-      'image1': $scope.experiment.trials[ $scope.currentTrialIndex ].images[0],
-      'image2': $scope.experiment.trials[ $scope.currentTrialIndex ].images[1],
-      'manipulated': false
-    });
+    $scope.trial = getTrial($scope.currentTrialIndex);
 
     if($scope.experiment === undefined) {
       $location.path('/start');
@@ -50,7 +59,11 @@ angular.module('mismatchControllers')
 
     var startTrial = function() {
 
-      $scope.trial.start();
+      $scope.trial.start().then(function(data) {
+        console.log(data);
+        $scope.currentTrialIndex++;
+        $scope.trial = getTrial($scope.currentTrialIndex);
+      });
 
     };
 

@@ -16,6 +16,45 @@ h1 {
     text-align: center;
   }
 
+button {
+  border: 1px solid red;
+  background: #fff;
+  border-radius: 0.5em;
+  padding: 0.5em 0.9em;
+  outline: none;
+}
+  button:hover {
+    background: red;
+    color: #fff;
+  }
+  button:focus, button:active {
+    background: black;
+    color: #fff;
+  }
+
+.radio-button {
+  border: 1px solid red;
+  background: #fff;
+  outline: none;
+  height: 1.1em;
+  width: 1.1em;
+  border-radius: 1.1em;
+  display: inline-block;
+  padding: 0;
+  vertical-align: bottom;
+}
+
+.l-container {
+  width: 1000px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto;
+}
+.l-center {
+  display: block;
+  text-align: center;
+}
+
 
 .precise-button {
   border-radius: 100%;
@@ -37,37 +76,88 @@ h1 {
 
 .face {
   display: block;
-  border: 1px dashed #ccc;
-  border-radius: 1em;
+  border: 1px solid black;
   height: 14em;
   width: 10em;
-  position: fixed;
+  position: absolute;
   cursor: pointer;
   -webkit-user-select:none;
   user-select: none;
 }
+  .chosen {
+    outline: 4px solid red;
+  }
   .face:hover {
-    border-style: solid;
+    border-color: red;
   }
   .face:active {
     border-color: red;
   }
   .face-right {
-    top: 60px;
-    right: 20px;
+    top: 0;
+    right: 0;
   }
   .face-left {
-    top: 60px;
-    left: 20px;
+    top: 0;
+    left: 0;
   }
   .face-image {
-    max-width: 100%;
-    height: auto;
+    width: 200px;
+    height: 300px;
+  }
+
+.is-hidden {
+  opacity: 0;
+}
+
+  .flip-container {
+    perspective: 1000;
+  }
+    /* flip the pane when hovered */
+    .flip-container.is-flipped .flipper {
+      transform: rotateY(180deg);
+    }
+    .flip-container.replace .flipper {
+      transform: translateY(-1000px);
+    }
+
+  .flip-container, .front, .back {
+    width: 200px;
+    height: 300px;
+  }
+
+  /* flip speed goes here */
+  .flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+  }
+
+  /* hide back of pane during swap */
+  .front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* front pane, placed above back */
+  .front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+  }
+
+  /* back, initially hidden pane */
+  .back {
+    transform: rotateY(180deg);
   }
 
 .controls {
-  position: fixed;
-  bottom: 40px;
+  position: absolute;
+  bottom: 0;
   left:0;
   right: 0;
 }
