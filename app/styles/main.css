@@ -3,6 +3,7 @@ body {
   color: #666;
   background-color: #fff;
   margin: 1em;
+  transition: 0.2s;
 }
 
 h1 {

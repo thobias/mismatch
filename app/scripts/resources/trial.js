@@ -45,8 +45,10 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
           trial.data.timing.start = window.performance.now();
           //trial.waiting = 2600;
           // wait 2000ms + 600ms animation
+          mouseTracking.startKillMouse();
           $timeout(function() {
             //trial.waiting = 0;
+            mouseTracking.stopKillMouse();
             trial.toggleImages(false);
           }, 2600);
         }, 500);
