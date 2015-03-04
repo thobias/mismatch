@@ -1,6 +1,13 @@
 var gulp = require('gulp'),
     webserver = require('gulp-webserver'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    ngmin = require('gulp-ngmin');
+
+gulp.task('minify', function () {
+    return gulp.src('app/app.js')
+        .pipe(ngmin({dynamic: true}))
+        .pipe(gulp.dest('dist'));
+});
 
 
 gulp.task('server', function() {

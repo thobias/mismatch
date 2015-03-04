@@ -140,6 +140,10 @@ angular.module('mismatchControllers')
     var completeExperiment = function() {
       console.log($rootScope.experiment);
       localStorage.setItem($rootScope.experiment.id, JSON.stringify($rootScope.experiment));
+
+      var url = 'data:text/json;charset=utf8,' + JSON.stringify( $rootScope.experiment );
+      window.open(url, '_blank');
+
       $location.path('/start');
     };
 
