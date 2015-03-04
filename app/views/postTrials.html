@@ -1,0 +1,19 @@
+<ng-include ng-show="!finished" src="'views/trial.html'"></ng-include>
+
+<div ng-show="finished" class="l-center text">
+  <h1>Final questions</h1>
+  <p>Did you notice anything strange about the trials?</p>
+  <textarea ng-model="experiment.initialFeedback"></textarea>
+  <p>In some of the trials we switched the face you chose to the other one. Did you notice this? (Yes/No radio buttons).</p>
+  <label for="noticedYes">Yes</label>
+  <input type="radio" name="noticed" ng-model="experiment.noticed" value="true" id="noticedYes"></input>
+  <label for="noticedNo">No</label>
+  <input type="radio" name="noticed" ng-model="experiment.noticed" value="false" id="noticedNo"></input>
+  <p>Do you have anything to say about the experiment? Please leave feedback down below.</p>
+  <textarea ng-model="experiment.debriefedFeedback"></textarea>
+</div>
+
+<div ng-show="finished" class="controls">
+  <h3>Click here to complete the experiment</h3>
+  <button ng-click="completeExperiment()" class="precise-button"></button>
+</div>

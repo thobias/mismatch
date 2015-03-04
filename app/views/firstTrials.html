@@ -1,0 +1,11 @@
+<ng-include ng-show="!finished" src="'views/trial.html'"></ng-include>
+
+<div ng-show="finished" class="l-center text">
+  <h1>Almost done!</h1>
+  <p>You will now be presented with 8 of the previous face pairs again. Just select which face you find more attractive, as in previous trials. There are no follow-up questions this time.</p>
+</div>
+
+<div ng-show="finished" class="controls">
+  <h3>Click here to continue</h3>
+  <a ng-href="#/postTrial" class="precise-button"></a>
+</div>

@@ -5,9 +5,8 @@ angular.module('mismatchControllers')
     // One resource with user data, the trials and experiment data (when finished)
     $rootScope.experiment = experiment;
 
-    // Calibration
     // User metadata
-    // First trials
+    // Test trials
     // Experiment #1
     // Experiment #2
     // Outro
@@ -33,15 +32,16 @@ angular.module('mismatchControllers')
     var startTrial = function() {
 
       $scope.trial.start().then(function(data) {
-        console.log(data);
+        trials[$scope.currentTrialIndex].data = angular.copy(data);
+
+        $scope.currentTrialIndex++;
 
         if( !getTrial( $scope.currentTrialIndex ) ) {
           $scope.finished = true;
-          // Save data to database
+
           return true;
         }
 
-        $scope.currentTrialIndex++;
         $scope.trial = getTrial($scope.currentTrialIndex);
       });
 
@@ -75,6 +75,7 @@ angular.module('mismatchControllers')
 
       mouseTracking.calibration().then(function(updatingFrequency) {
         mouseTracking.setUpdatingFrequency(updatingFrequency);
+        // Save to experiment?
         console.log('Updating frequency set to ' + mouseTracking.updatingFrequency + ' ms (' + 1000/mouseTracking.updatingFrequency + ' hz)');
       });
 
@@ -96,5 +97,55 @@ angular.module('mismatchControllers')
     $scope.startTrial         = startTrial;
     $scope.started            = false;
     $scope.finished           = false;
+
+  }])
+  .controller('PostTrialCtrl', ['$scope', '$rootScope', 'mouseTracking', 'trials', 'trial', function($scope, $rootScope, mouseTracking, trials, trial) {
+    var trials = trials;
+
+    var getTrial = function(index) {
+
+      if( !trials[ index ] || trials[ index ] === undefined) {
+        return false;
+      }
+
+      return trial({
+        'id': trials[ index ].id,
+        'image1': trials[ index ].image1,
+        'image2': trials[ index ].image2,
+        'manipulated': false,
+        'onlyChoose': true
+      });
+
+    };
+
+    var startTrial = function() {
+
+      $scope.trial.start().then(function(data) {
+        console.log(data);
+        trials[$scope.currentTrialIndex].data = angular.copy(data);
+
+        $scope.currentTrialIndex++;
+
+        if( !getTrial( $scope.currentTrialIndex ) ) {
+          $scope.finished = true;
+          // Save data to DB?
+          return true;
+        }
+
+        $scope.trial = getTrial( $scope.currentTrialIndex );
+      });
+
+    };
+
+    var completeExperiment = function() {
+      console.log($rootScope.experiment);
+    };
+
+    $scope.currentTrialIndex  = 0;
+    $scope.trial              = getTrial($scope.currentTrialIndex);
+    $scope.startTrial         = startTrial;
+    $scope.started            = false;
+    $scope.finished           = false;
+    $scope.completeExperiment = completeExperiment;
 
   }]);

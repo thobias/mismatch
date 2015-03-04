@@ -9,6 +9,39 @@
     <li>You want to participate in the above-mentioned experiment.</li>
   </ul>
 </div>
+<div>
+  <label for="age">Age</label>
+  <input type="number" min="18" max="99" value="20" id="age" ng-model="experiment.user.age"></input>
+  <label for="sex">Sex</label>
+  <select id="sex" ng-model="experiment.user.sex">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <label for="hand">Handedness</label>
+  <select id="hand" ng-model="experiment.user.hand">
+    <option value="right" selected>Right</option>
+    <option value="left">Left</option>
+  </select>
+  <label for="device">Pointing device</label>
+  <select id="device" ng-model="experiment.user.device">
+    <option value="mouse" selected>Mouse</option>
+    <option value="trackpad">Trackpad</option>
+    <option value="touchscreen">Touchscreen</option>
+    <option value="stylus">Stylus</option>
+    <option value="other">Other</option>
+  </select>
+  <label for="position">Pointing device position</label>
+  <select id="position" ng-model="experiment.user.devicePosition">
+    <option value="right" selected>To my right</option>
+    <option value="left">To my left</option>
+    <option value="fron">In front of me</option>
+    <option value="other">Other</option>
+  </select>
+  <label for="agree">I agree to the conditions and would like to participate in the experiment</label>
+  <input type="checkbox"></input>
+</div>
+
+<!-- Collect metadata -->
 
 <div class="controls">
   <h3>Click here to continue</h3>

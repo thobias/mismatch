@@ -12,7 +12,7 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServic
         controller: 'StartCtrl'
       }).
       when('/trial', {
-        templateUrl: 'views/trial.html',
+        templateUrl: 'views/firstTrials.html',
         controller: 'TrialCtrl',
         resolve: {
           trials: function($location, $rootScope) {
@@ -30,6 +30,17 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServic
             if(!$rootScope.experiment) { $location.path('/start'); }
 
             return $rootScope.experiment['preTrials'];
+          },
+        }
+      }).
+      when('/postTrial', {
+        templateUrl: 'views/postTrials.html',
+        controller: 'PostTrialCtrl',
+        resolve: {
+          trials: function($location, $rootScope) {
+            if(!$rootScope.experiment) { $location.path('/start'); }
+
+            return $rootScope.experiment['postTrials'];
           },
         }
       }).

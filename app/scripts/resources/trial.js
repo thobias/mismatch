@@ -18,6 +18,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         }
       ],
       manipulated: spec.manipulated || false,
+      onlyChoose: spec.onlyChoose || false,
       showScale: false,
       showStart: true,
       showFeedback: false,
@@ -67,6 +68,12 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         trial.data.choice     = choiceIndex;
 
         trial.toggleImages(false);
+
+        if(trial.onlyChoose) {
+          trial.finish();
+          return true;
+        }
+
         trial.showScale = true;
       },
       rate: function(rating) {
@@ -97,9 +104,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         trial.images[0].replace = replace;
         trial.images[1].replace = replace;
       },
-      feedback: function(reason) {
-        trial.data.timing.feedback = window.performance.now();
-        trial.data.reason = reason;
+      finish: function() {
         trial.waiting = 2000;
         trial.toggleImages(false);
         trial.replaceCards(true);
@@ -110,6 +115,11 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
           trial.defer.resolve(trial.data);
           trial.waiting = 0;
         }, 2000);
+      },
+      feedback: function(reason) {
+        trial.data.timing.feedback = window.performance.now();
+        trial.data.reason = reason;
+        trial.finish();
       }
     }
     return trial;
