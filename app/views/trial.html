@@ -1,6 +1,3 @@
-
-<h2 ng-show="trial.waiting > 0">Wait ({{trial.waiting}})</h2>
-
 <div ng-click="trial.choiceMade(0)" ng-class="{'is-flipped': !trial.images[0].show, 'replace': trial.images[0].replace, 'chosen': trial.data.choice == 0 && !trial.images[0].replace}" class="flip-container face face-left">
   <div class="flipper">
     <div class="front">
@@ -63,3 +60,6 @@
   </div>
 </div>
 
+<div class="l-center">
+  <countdown time="trial.waiting"></countdown>
+</div>

@@ -38,17 +38,17 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       start: function() {
         mouseTracking.startTracking();
         trial.showStart = false;
-        trial.waiting = 500;
+        //trial.waiting = 500;
         // Wait 500ms
         $timeout(function() {
           trial.toggleImages(true);
           trial.data.timing.start = window.performance.now();
-          trial.waiting = 2000;
-          // wait 2000ms
+          //trial.waiting = 2600;
+          // wait 2000ms + 600ms animation
           $timeout(function() {
-            trial.waiting = 0;
+            //trial.waiting = 0;
             trial.toggleImages(false);
-          }, 2000);
+          }, 2600);
         }, 500);
 
         return trial.defer.promise;

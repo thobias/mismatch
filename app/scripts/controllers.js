@@ -99,7 +99,7 @@ angular.module('mismatchControllers')
     $scope.finished           = false;
 
   }])
-  .controller('PostTrialCtrl', ['$scope', '$rootScope', 'mouseTracking', 'trials', 'trial', function($scope, $rootScope, mouseTracking, trials, trial) {
+  .controller('PostTrialCtrl', ['$scope', '$rootScope', '$location', 'mouseTracking', 'trials', 'trial', function($scope, $rootScope, $location, mouseTracking, trials, trial) {
     var trials = trials;
 
     var getTrial = function(index) {
@@ -139,6 +139,8 @@ angular.module('mismatchControllers')
 
     var completeExperiment = function() {
       console.log($rootScope.experiment);
+      localStorage.setItem($rootScope.experiment.id, JSON.stringify($rootScope.experiment));
+      $location.path('/start');
     };
 
     $scope.currentTrialIndex  = 0;

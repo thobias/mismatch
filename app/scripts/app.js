@@ -3,8 +3,9 @@
 angular.module('mismatchControllers', []);
 angular.module('mismatchServices', []);
 angular.module('mismatchResources', []);
+angular.module('mismatchDirectives', []);
 
-angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServices', 'mismatchResources'])
+angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServices', 'mismatchResources', 'mismatchDirectives'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider.
       when('/start', {
