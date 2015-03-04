@@ -1,4 +1,4 @@
-<div ng-show="!started" class="l-center text">
+<div ng-show="!started && !showForm" class="l-center text">
   <h1>Welcome</h1>
   <p>The experiment will have two parts with multiple trials where you chose between two faces based on attractiveness. It’s important that you use your dominant hand, as this study aims to evaluate any possible correlations between handedness and attractiveness ratings.</p>
   <p>This will take approximately X minutes. If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty. Your individual privacy will be maintained in all published and written data resulting from the study.</p>
@@ -8,42 +8,62 @@
     <li>You have read the above consent, understood it and you agree to it.</li>
     <li>You want to participate in the above-mentioned experiment.</li>
   </ul>
-</div>
-<div>
-  <label for="age">Age</label>
-  <input type="number" min="18" max="99" value="20" id="age" ng-model="experiment.user.age"></input>
-  <label for="sex">Sex</label>
-  <select id="sex" ng-model="experiment.user.sex">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-  </select>
-  <label for="hand">Handedness</label>
-  <select id="hand" ng-model="experiment.user.hand">
-    <option value="right" selected>Right</option>
-    <option value="left">Left</option>
-  </select>
-  <label for="device">Pointing device</label>
-  <select id="device" ng-model="experiment.user.device">
-    <option value="mouse" selected>Mouse</option>
-    <option value="trackpad">Trackpad</option>
-    <option value="touchscreen">Touchscreen</option>
-    <option value="stylus">Stylus</option>
-    <option value="other">Other</option>
-  </select>
-  <label for="position">Pointing device position</label>
-  <select id="position" ng-model="experiment.user.devicePosition">
-    <option value="right" selected>To my right</option>
-    <option value="left">To my left</option>
-    <option value="fron">In front of me</option>
-    <option value="other">Other</option>
-  </select>
-  <label for="agree">I agree to the conditions and would like to participate in the experiment</label>
-  <input type="checkbox"></input>
+  <div style="margin-top:1em">
+    <input style="margin-right:0.5em" id="agree" type="checkbox"></input>
+    <label for="agree">I agree to the conditions and would like to participate in the experiment</label>
+  </div>
 </div>
 
-<!-- Collect metadata -->
+<div ng-show="showForm" class="l-center text">
+  <h1>Some information</h1>
+  <p>First we need some basic information about you and your setup</p>
+  <div class="form-container l-center">
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" min="18" max="99" value="20" id="age" ng-model="experiment.user.age"></input>
+    </div>
+    <div class="form-group">
+      <label for="sex">Sex</label>
+      <select id="sex" ng-model="experiment.user.sex">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="hand">Handedness</label>
+      <select id="hand" ng-model="experiment.user.hand">
+        <option value="right" selected>Right</option>
+        <option value="left">Left</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="device">Pointing device</label>
+      <select id="device" ng-model="experiment.user.device">
+        <option value="mouse" selected>Mouse</option>
+        <option value="trackpad">Trackpad</option>
+        <option value="touchscreen">Touchscreen</option>
+        <option value="stylus">Stylus</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="position">Pointing device position</label>
+      <select id="position" ng-model="experiment.user.devicePosition">
+        <option value="right" selected>To my right</option>
+        <option value="left">To my left</option>
+        <option value="fron">In front of me</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  </div>
+</div>
 
-<div class="controls">
+<div ng-show="!started && !showForm" class="controls">
+  <h3>Click here to continue</h3>
+  <button ng-click="showForm=true" class="precise-button"></button>
+</div>
+
+<div ng-show="!started && showForm" class="controls">
   <h3>Click here to continue</h3>
   <a ng-href="#/preTrial" class="precise-button"></a>
 </div>
