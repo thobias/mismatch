@@ -1,0 +1,21 @@
+<ng-include ng-show="started && !finished" src="'views/trial.html'"></ng-include>
+
+<div ng-show="!started" class="l-center text">
+  <h1>Test trials</h1>
+  <p>We will start with three test trials for you to get comfortable with the interface. Two images of faces will be presented at the top left and top right of the window half a second after you click the start button. You get 2 seconds to look at the pictures, do not move the mouse during this period. After this, click on the face which you found more attractive. You will get a follow-up question regarding how sure you are of your choice. After this the chosen image will be shown again and you are asked to select the main reason for choosing this face. This completes one trial.</p>
+</div>
+
+<div ng-show="!started && !finished" class="controls">
+  <h3>Click here to continue</h3>
+  <button ng-click="started = true" class="precise-button"></button>
+</div>
+
+<div ng-show="finished" class="l-center text">
+  <h1>Well done!</h1>
+  <p>Now on to the real trials! You will be presented with 20 new pairs of faces, the procedure is exactly the same as the test trials.</p>
+</div>
+
+<div ng-show="finished" class="controls">
+  <h3>Click here to continue</h3>
+  <a ng-href="#/trial" class="precise-button"></a>
+</div>

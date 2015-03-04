@@ -36,8 +36,8 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
           deltaSamples++;
         }
 
-        // Stop calibration after 50 samples
-        if(deltaSamples >= 50) {
+        // Stop calibration after 100 samples
+        if(deltaSamples >= 100) {
           document.onmousemove = null;
           // Caclulate mean delta and return
           defer.resolve( deltaTimeSum/deltaSamples );

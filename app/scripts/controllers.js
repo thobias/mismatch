@@ -4,6 +4,7 @@ angular.module('mismatchControllers')
   .controller('StartCtrl', ['$scope', '$rootScope', 'experiment', function($scope, $rootScope, experiment) {
     // One resource with user data, the trials and experiment data (when finished)
     $rootScope.experiment = experiment;
+
     // Calibration
     // User metadata
     // First trials
@@ -11,77 +12,89 @@ angular.module('mismatchControllers')
     // Experiment #2
     // Outro
   }])
-  .controller('TrialCtrl', ['$scope', '$rootScope', '$location', 'trial', function($scope, $rootScope, $location, trial) {
-    $scope.experiment = $rootScope.experiment;
-
-    if(!$scope.experiment) {
-      $location.path('/start');
-    }
+  .controller('TrialCtrl', ['$scope', 'trials', 'trial', function($scope, trials, trial) {
+    var trials = trials;
 
     var getTrial = function(index) {
+
+      if( !trials[ index ] || trials[ index ] === undefined) {
+        return false;
+      }
+
       return trial({
-        'id': $scope.experiment.trials[ index ].id,
-        'image1': $scope.experiment.trials[ index ].image1,
-        'image2': $scope.experiment.trials[ index ].image2,
-        'manipulated': $scope.experiment.trials[ index ].manipulated
+        'id': trials[ index ].id,
+        'image1': trials[ index ].image1,
+        'image2': trials[ index ].image2,
+        'manipulated': trials[ index ].manipulated
       });
+
     };
-
-    $scope.currentTrialIndex = 0;
-
-    $scope.trial = getTrial($scope.currentTrialIndex);
-
-    if($scope.experiment === undefined) {
-      $location.path('/start');
-    }
-
-    // Get data
-    // Set images
-    // Flipping of images
-    // Is manipulated?
-    // Show likert scale for judgement
-    // Goto next trial
-
-    // Click
-    // Wait
-    // FLip images
-    // Wait 2s
-    // Choice is made
-    // Flip images
-    // Show scale
-    // Click scale
-    // Show chosen (or manipulated) image
-    // Wait 2s?
-    // Show reasons
-    // Choose reason
-    // Next trial
-
 
     var startTrial = function() {
 
       $scope.trial.start().then(function(data) {
         console.log(data);
+
+        if( !getTrial( $scope.currentTrialIndex ) ) {
+          $scope.finished = true;
+          // Save data to database
+          return true;
+        }
+
         $scope.currentTrialIndex++;
         $scope.trial = getTrial($scope.currentTrialIndex);
       });
 
     };
 
-
-    $scope.startTrial = startTrial;
-    //$scope.stopTracking = stopTracking;
+    $scope.currentTrialIndex  = 0;
+    $scope.trial              = getTrial($scope.currentTrialIndex);
+    $scope.startTrial         = startTrial;
+    $scope.finished           = false;
 
   }])
-  .controller('CalibrationCtrl', ['$scope', '$location', 'mouseTracking', function($scope, $location, mouseTracking) {
+  .controller('PreTrialCtrl', ['$scope', 'mouseTracking', 'trials', 'trial', function($scope, mouseTracking, trials, trial) {
+    var trials = trials;
 
-    var startCalibration = function() {
+    var getTrial = function(index) {
+
+      if( !trials[ index ] || trials[ index ] === undefined) {
+        return false;
+      }
+
+      return trial({
+        'id': trials[ index ].id,
+        'image1': trials[ index ].image1,
+        'image2': trials[ index ].image2,
+        'manipulated': trials[ index ].manipulated
+      });
+
+    };
+
+    var startTrial = function() {
+
       mouseTracking.calibration().then(function(updatingFrequency) {
         mouseTracking.setUpdatingFrequency(updatingFrequency);
         console.log('Updating frequency set to ' + mouseTracking.updatingFrequency + ' ms (' + 1000/mouseTracking.updatingFrequency + ' hz)');
-        $location.path('/trial');
       });
+
+      $scope.trial.start().then(function(data) {
+        $scope.currentTrialIndex++;
+
+        if( !getTrial( $scope.currentTrialIndex ) ) {
+          $scope.finished = true;
+          return true;
+        }
+
+        $scope.trial = getTrial( $scope.currentTrialIndex );
+      });
+
     };
 
-    $scope.startCalibration = startCalibration;
+    $scope.currentTrialIndex  = 0;
+    $scope.trial              = getTrial($scope.currentTrialIndex);
+    $scope.startTrial         = startTrial;
+    $scope.started            = false;
+    $scope.finished           = false;
 
   }]);

@@ -74,7 +74,6 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
 
         // Wait 7000 ms
         var waitingTime = 7000 -  (window.performance.now() - trial.data.timing.choice);
-        console.log(waitingTime);
         trial.waiting = waitingTime;
 
         $timeout(function() {
