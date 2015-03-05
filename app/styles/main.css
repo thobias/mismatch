@@ -93,18 +93,15 @@ button {
   height: 14em;
   width: 10em;
   position: absolute;
-  cursor: pointer;
   -webkit-user-select:none;
   user-select: none;
 }
   .chosen {
-    outline: 4px solid red;
+    outline: 4px solid #66ee33;
   }
-  .face:hover {
-    border-color: red;
-  }
+
   .face:active {
-    border-color: red;
+    outline: 4px solid #99ff66;
   }
   .face-right {
     top: 0;
@@ -118,6 +115,22 @@ button {
     width: 221px;
     height: 274px;
   }
+  .face-target {
+    width: 30px;
+    height: 30px;
+    border: 4px solid red;
+    position: absolute;
+    top: 118px;
+    left: 91px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+    .face-target:hover {
+      background-color: red;
+    }
+    .face-target:focus, .face-target:active {
+      background-color: red;
+    }
 
 .is-hidden {
   opacity: 0;
@@ -183,9 +196,9 @@ button {
   display: block;
   margin: 0 auto;
   height: 0.5em;
-  width: 30%;
-  border: 1px solid #ccc;
-  position: relative;
+  width: 100%;
+  top:0; left:0; right:0;
+  position: fixed;
   transition:0.2s;
 }
   .timer-fill {
@@ -237,4 +250,6 @@ button {
   bottom: -1px;
   border-radius: 50%;
 }
-
+.alert-text {
+  color: #fff;
+}
