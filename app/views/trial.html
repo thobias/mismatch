@@ -4,7 +4,7 @@
       <img class="face-image" ng-src="{{trial.images[0].url}}">
     </div>
     <div class="back">
-      <div ng-show="!trial.showStart && !trial.images[1].show && !trial.waiting && !trial.showButton" class="face-target" ng-click="trial.choiceMade(0)"></div>
+      <div ng-show="!trial.showStart && !trial.images[1].show && !trial.waiting && !trial.showButton && trial.data.choice == null" class="face-target" ng-click="trial.choiceMade(0)"></div>
      <img class="face-image face-back" src="https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg">
     </div>
   </div>
@@ -16,7 +16,7 @@
       <img class="face-image" ng-src="{{trial.images[1].url}}">
     </div>
     <div class="back">
-      <div ng-show="!trial.showStart && !trial.images[0].show && !trial.waiting && !trial.showButton" class="face-target" ng-click="trial.choiceMade(1)"></div>
+      <div ng-show="!trial.showStart && !trial.images[0].show && !trial.waiting && !trial.showButton && trial.data.choice == null" class="face-target" ng-click="trial.choiceMade(1)"></div>
      <img class="face-image face-back" src="https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg">
     </div>
   </div>
