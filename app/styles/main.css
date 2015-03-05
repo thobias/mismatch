@@ -224,3 +224,17 @@ button {
     height: 6em;
   }
 
+.countdownButton {
+  position: relative;
+}
+.countdownButton-fill {
+  background-color: #fff;
+  height: auto;
+  position: absolute;
+  left:-1px;
+  top:-1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 50%;
+}
+

@@ -20,9 +20,10 @@
   </div>
 </div>
 
-<div ng-show="trial.showStart" class="controls">
-  <h3>Click here to start</h3>
-  <button ng-click="startTrial()" class="precise-button"></button>
+<div class="controls">
+  <h3 ng-show="trial.showStart">Click here to start</h3>
+  <!--<button ng-click="startTrial()" class="precise-button"></button>-->
+  <countdown-button ng-click="startTrial()" hold="trial.holdMouse" ng-show="trial.showStart || trial.showButton" time="trial.waiting"></button>
   <!-- <button countdownButton time="2000" onComplete="startTracking()" class="countdownButton"></button> -->
 </div>
 
@@ -60,6 +61,6 @@
   </div>
 </div>
 
-<div class="l-center">
+<div ng-show="!trial.showButton" class="l-center">
   <countdown time="trial.waiting"></countdown>
 </div>

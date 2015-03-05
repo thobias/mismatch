@@ -69,17 +69,6 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
       document.onmousemove = null;
 
       return tracker.result;
-    },
-    startKillMouse: function() {
-      body.css({'cursor': 'none'}).on('mousemove', function() {
-        body.css({'background': '#ff0000'});
-        setTimeout(function() {
-          body.css({'background': '#ffffff'});
-        }, 400);
-      });
-    },
-    stopKillMouse: function() {
-      body.off('mousemove').css({'cursor': 'default'});
     }
   };
 

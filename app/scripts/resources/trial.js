@@ -22,6 +22,8 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       showScale: false,
       showStart: true,
       showFeedback: false,
+      holdMouse: false,
+      showButton: false,
       waiting: 0,
       data: {
         'tracking': null,
@@ -38,17 +40,19 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       start: function() {
         mouseTracking.startTracking();
         trial.showStart = false;
+        trial.showButton = true;
         //trial.waiting = 500;
         // Wait 500ms
         $timeout(function() {
           trial.toggleImages(true);
           trial.data.timing.start = window.performance.now();
-          //trial.waiting = 2600;
+          trial.waiting = 2600;
           // wait 2000ms + 600ms animation
-          mouseTracking.startKillMouse();
+          trial.holdMouse = true;
           $timeout(function() {
-            //trial.waiting = 0;
-            mouseTracking.stopKillMouse();
+            trial.waiting = 0;
+            trial.holdMouse = false;
+            trial.showButton = false;
             trial.toggleImages(false);
           }, 2600);
         }, 500);
