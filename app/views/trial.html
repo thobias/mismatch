@@ -26,7 +26,7 @@
   <!-- <button countdownButton time="2000" onComplete="startTracking()" class="countdownButton"></button> -->
 </div>
 
-<div ng-show="trial.showScale" class="controls">
+<div ng-show="trial.showScale && !trial.waiting" class="controls">
   <h3>How sure are you?</h3>
   <!--<input type="range" min="1" max="7" name="rating">-->
   <div class="l-center">
@@ -47,7 +47,7 @@
   </div>
 </div>
 
-<div ng-show="trial.showFeedback" class="controls">
+<div ng-show="trial.showFeedback && !trial.waiting" class="controls">
   <h3>You chose the face above. Why did you choose this face?</h3>
   <div class="l-center">
     <button ng-click="trial.feedback('mouth')">Mouth</button>
