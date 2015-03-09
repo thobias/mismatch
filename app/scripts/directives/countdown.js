@@ -25,7 +25,7 @@ angular.module('mismatchDirectives').directive('countdown', function() {
           clearInterval(timer);
           timer = false;
           container.css({'opacity': 0});
-          //render(100);
+          render(100);
         }
       };
 
@@ -36,6 +36,7 @@ angular.module('mismatchDirectives').directive('countdown', function() {
       };
 
       scope.$watch( attrs.time , function(val) {
+        if(val < 10) {return;}
         timers.push(1);
         element.css({'opacity': 1});
 

@@ -49,13 +49,18 @@ button {
   border: 1px solid red;
   background: #fff;
   outline: none;
-  height: 1.1em;
-  width: 1.1em;
-  border-radius: 1.1em;
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
   display: inline-block;
   padding: 0;
-  vertical-align: bottom;
 }
+  .radio-button:hover {
+    color: #fff;
+  }
+  .radio-button .span {
+
+  }
 
 .l-container {
   width: 1000px;
@@ -116,12 +121,12 @@ button {
     height: 274px;
   }
   .face-target {
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     border: 4px solid red;
     position: absolute;
-    top: 118px;
-    left: 91px;
+    top: 103px;
+    left: 76px;
     cursor: pointer;
     border-radius: 50%;
   }
@@ -195,11 +200,12 @@ button {
 .timer {
   display: block;
   margin: 0 auto;
-  height: 0.5em;
-  width: 100%;
-  top:0; left:0; right:0;
+  height: 1em;
+  top:8em; left:40%; right:40%;
   position: fixed;
   transition:0.2s;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
 }
   .timer-fill {
     display: block;
@@ -207,6 +213,9 @@ button {
     width: 0%;
     background-color: #eee;
     position: relative;
+    border-radius: 0.5em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     transition: 0.06s;
   }
 
@@ -236,9 +245,15 @@ button {
     width: 100%;
     height: 6em;
   }
+  label {
+    cursor: pointer;
+    -webkit-user-select:none;
+  }
 
 .countdownButton {
   position: relative;
+  cursor: pointer;
+  -webkit-user-select:none;
 }
 .countdownButton-fill {
   background-color: #fff;
@@ -249,6 +264,8 @@ button {
   right: -1px;
   bottom: -1px;
   border-radius: 50%;
+  cursor: pointer;
+  -webkit-user-select:none;
 }
 .alert-text {
   color: #fff;
