@@ -12,7 +12,24 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
           fill = $('<div class="countdownButton-fill"></div>').appendTo(container),
           current = 0,
           time = 0,
-          timer = false;
+          timer = false,
+          alert = $('<h1 class="alert-text">Don\'t move the cursor</h1>').appendTo(body).hide(),
+          faces = $('.face');
+
+      container.on('mouseover', function() {
+        container.on('mouseout', function() {
+          container.css({'cursor': 'none'});
+          body.css({'background': '#ff0000'});
+          faces.css({'opacity': 0});
+          alert.show();
+        });
+        container.on('mouseover', function() {
+          body.css({'background': '#ffffff'});
+          container.css({'cursor': 'pointer'});
+          faces.css({'opacity': 1});
+          alert.hide();
+        })
+      });
 
       var render = function(percent) {
         fill.css({'opacity': 1 - percent/100});
@@ -24,6 +41,7 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
           clearInterval(timer);
           timer = false;
         }
+        container.off('mouseout');
       };
 
       var step = function() {
@@ -41,16 +59,16 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
         timer   = timer || setInterval(step, 50);
       });
 
-      var alert = $('<h1 class="alert-text">Don\'t move the cursor</h1>').appendTo(body).hide();
-
       scope.$watch( attrs.hold , function(val) {
         if(val) {
           container.on('mouseout', function() {
             body.css({'background': '#ff0000'});
+            faces.css({'opacity': 0});
             alert.show();
           });
           container.on('mouseover', function() {
             body.css({'background': '#ffffff'});
+            faces.css({'opacity': 1});
             alert.hide();
           });
           container.css({'cursor': 'none'});
@@ -59,6 +77,7 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
           container.off('mouseout');
           body.css({'background': '#ffffff'});
           container.css({'cursor': 'default'});
+          faces.css({'opacity': 1});
           alert.hide();
         }
       });
