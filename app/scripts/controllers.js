@@ -53,6 +53,49 @@ angular.module('mismatchControllers')
     $scope.finished           = false;
 
   }])
+  .controller('ViewDataCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+    $scope.input = '';
+    $scope.result = '';
+
+    $scope.process = function() {
+      var experiments = JSON.parse($scope.input);
+      var result = 'x, y, t, rt, r, tid, eid, m, d\n';
+
+      $.each(experiments, function() {
+
+        var experiment = this;
+
+        $.each(experiment.trials, function() {
+          var trial = this;
+          var rows = trial.data.tracking.split('\n');
+
+          var firstTime = false;
+          var firstX = false;
+          var firstY = false;
+
+          $.each(rows, function() {
+            var column = this.split(', ');
+
+            firstTime = firstTime ? firstTime : column[2];
+
+            // 500ms delay, 600ms animation, 2000 ms dislay time, 600ms animation
+            if(column[0] && column[1] && column[2] && column[2] - firstTime > 3700.0) {
+              firstX = firstX ? firstX : column[0];
+              firstY = firstY ? firstY : column[1];
+              //result = result + (column[0] - firstX) + ', ' + (firstY - column[1]) + ', ' + (column[2] - firstTime) + ', ' + (trial.data.timing.choice - trial.data.timing.start) + ', ' + trial.data.rating + ', ' + trial.id + ', ' + experiment.id + ', ' + (trial.manipulated ? 1 : 0) + ', ' + (trial.data.reason == "other" ? 1 : 0) + '\n';
+              result = result + (column[0]) + ', ' + (column[1]) + ', ' + (column[2] - firstTime) + ', ' + (trial.data.timing.choice - trial.data.timing.start) + ', ' + trial.data.rating + ', ' + trial.id + ', ' + experiment.id + ', ' + (trial.manipulated ? 1 : 0) + ', ' + (trial.data.reason == "other" ? 1 : 0) + '\n';
+            }
+          });
+        });
+
+      });
+
+
+      $scope.result = result;
+    };
+
+
+  }])
   .controller('PreTrialCtrl', ['$scope', 'mouseTracking', 'trials', 'trial', function($scope, mouseTracking, trials, trial) {
     var trials = trials;
 
