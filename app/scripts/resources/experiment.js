@@ -1,20 +1,24 @@
 angular.module('mismatchResources').factory('experiment', [function() {
   // Generate on runtime
-
+  var engine = Random.engines.mt19937().autoSeed();
   // 8 potentially manipulated
   // Pick 4
   // Randomize order
   // Add to array of trials
   // Add to postTrials
-
   return {
-    'id': Date.now(),
+    'userId': Date.now() + Random.uuid4(engine),
+    'experimentId': 1,
     'user': {
       'sex': 'm',
       'age': 25,
       'device': 'mouse',
       'devicePosition': 'right',
-      'hand': 'right'
+      'hand': 'right',
+      'screen': {
+        'width': screen.width,
+        'height': screen.height
+      }
     },
     'preTrials': [
       {
