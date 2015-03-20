@@ -68,7 +68,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       },
       choiceMade: function(choiceIndex) {
         var results = mouseTracking.stopTracking();
-        trial.data.timing.choice = window.performance.now();
+        trial.data.timing.choice = window.performance.now() - trial.data.timing.start;
 
         trial.data.tracking   = angular.copy(results);
         trial.data.choice     = choiceIndex;
@@ -86,7 +86,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         trial.data.rating = rating;
 
         // Wait 7000 ms
-        var waitingTime = 7000 -  (window.performance.now() - trial.data.timing.choice);
+        var waitingTime = 7000 - (window.performance.now() - trial.data.timing.choice);
         trial.waiting = waitingTime;
 
         $timeout(function() {

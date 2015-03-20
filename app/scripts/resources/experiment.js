@@ -1,5 +1,12 @@
 angular.module('mismatchResources').factory('experiment', [function() {
   // Generate on runtime
+
+  // 8 potentially manipulated
+  // Pick 4
+  // Randomize order
+  // Add to array of trials
+  // Add to postTrials
+
   return {
     'id': Date.now(),
     'user': {
@@ -78,7 +85,7 @@ angular.module('mismatchResources').factory('experiment', [function() {
         'id': 2,
         'image1': 'images/faces/005AA.jpg',
         'image2': 'images/faces/005BB.jpg',
-        'manipulated': false
+        'manipulated': true
       },
       {
         'id': 3,
