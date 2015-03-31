@@ -1,10 +1,13 @@
 'use strict';
 
-angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$timeout', function(mouseTracking, $q, $timeout) {
+angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$timeout', '$http', '$rootScope', function(mouseTracking, $q, $timeout, $http, $rootScope) {
 
   return function(spec) {
     var trial = {
       id: spec.id,
+      experiment: $rootScope.experiment._id,
+      experimentId: $rootScope.experiment.experimentId,
+      userId: $rootScope.experiment.userId,
       images: [
         {
           'url': spec.image1,
@@ -72,6 +75,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
 
         trial.data.tracking   = angular.copy(results);
         trial.data.choice     = choiceIndex;
+        trial.data.choiceId   = trial.id + (choiceIndex === 0 ? 'AA' : 'BB');
 
         trial.toggleImages(false);
 
@@ -95,7 +99,6 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
           }
           else {
             trial.images[ trial.data.choice ].url = trial.images[ (trial.data.choice === 1 ? 0 : 1) ].url;
-            console.log(trial);
             trial.showImage( trial.data.choice );
           }
 
@@ -125,7 +128,17 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       feedback: function(reason) {
         trial.data.timing.feedback = window.performance.now();
         trial.data.reason = reason;
+        trial.data.detected = (reason === 'other' ? true : false);
         trial.finish();
+      },
+      save: function() {
+        $http.post('/trials', trial).
+          success(function(data) {
+            console.log(data);
+          }).
+          error(function(data) {
+            console.log(data);
+          });
       }
     }
     return trial;

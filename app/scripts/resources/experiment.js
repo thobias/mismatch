@@ -1,4 +1,4 @@
-angular.module('mismatchResources').factory('experiment', [function() {
+angular.module('mismatchResources').factory('experiment', ['$http', function($http) {
 
   // Generate a trial
   var trial = function(id, manipulated) {
@@ -21,7 +21,7 @@ angular.module('mismatchResources').factory('experiment', [function() {
   // Shuffle the trials
   var trials = Random.shuffle(engine, angular.copy(ordinaryTrials));
   // Splice in our manipulated trials at random places but avoiding back-to-back manipulations
-  var validIndexes = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  var validIndexes = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   $.each(chosen, function() {
     var index = Random.pick( engine, validIndexes );
     trials.splice(index, 0, this);
@@ -38,9 +38,16 @@ angular.module('mismatchResources').factory('experiment', [function() {
   postTrials = Random.shuffle( engine, postTrials );
 
   // Choose pre-trials
-  var preTrials = [trial('001'), trial('002'), trial('003'), trial('004'), trial('005')];
+  //var preTrials = [trial('001'), trial('002'), trial('003'), trial('004'), trial('005')];
+  var preTrials = [trial('001')];
   // Shuffle
   preTrials = Random.shuffle( engine, preTrials );
+
+  var out = '';
+  $.each(trials, function(i, trial) {
+    out = out + i + ', ' + trial.id + ', ' + (trial.manipulated ? '1' : 0) + '\n';
+  });
+  console.log(out);
 
   // Complete experiment object
   var experiment = {
@@ -59,8 +66,17 @@ angular.module('mismatchResources').factory('experiment', [function() {
     },
     'preTrials': preTrials,
     'trials': trials,
-    'postTrials': postTrials
+    'postTrials': postTrials,
+    save: function() {
+      $http.post('/experiments', experiment).
+        success(function(data) {
+          console.log(data);
+        }).
+        error(function(data) {
+          console.log(data);
+        });
+    }
   };
-  console.log(experiment);
+
   return experiment;
 }]);
