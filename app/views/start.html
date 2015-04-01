@@ -9,8 +9,8 @@
     <li>You want to participate in the above-mentioned experiment.</li>
   </ul>
   <div style="margin-top:1em">
-    <input style="margin-right:0.5em" id="agree" type="checkbox"></input>
-    <label for="agree">I agree to the conditions and would like to participate in the experiment</label>
+    <input ng-init="agree=false" style="margin-right:0.5em" ng-model="agree" id="agree" type="checkbox"></input>
+    <label for="agree" class="important-text">I agree to the conditions and would like to participate in the experiment</label>
   </div>
 </div>
 
@@ -56,9 +56,10 @@
       </select>
     </div>
   </div>
+  <p class="important-text">Please use a recent version of Chrome or Firefox for this experiment</p>
 </div>
 
-<div ng-show="!started && !showForm" class="controls">
+<div ng-show="!started && !showForm && agree" class="controls">
   <h3>Click here to continue</h3>
   <button ng-click="showForm=true" class="precise-button"></button>
 </div>

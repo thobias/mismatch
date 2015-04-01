@@ -23,9 +23,9 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   var available = [getTrial('006', true), getTrial('007', true), getTrial('008', true), getTrial('009', true), getTrial('010', true), getTrial('011', true), getTrial('012', true), getTrial('013', true)];
   // Pick 4 of them and shuffle the order
   var chosen = Random.shuffle( engine, Random.sample(engine, available, 4) );
-  // 16 ordinary trials (non-manipulated)
-  //var ordinaryTrials = [getTrial('014'), getTrial('015'), getTrial('016'), getTrial('017'), getTrial('018'), getTrial('019'), getTrial('020'), getTrial('021'), getTrial('022'), getTrial('023'), getTrial('024'), getTrial('025'), getTrial('026'), getTrial('027'), getTrial('028'), getTrial('029'), getTrial('030'), getTrial('031'), getTrial('032'), getTrial('033')];
-  var ordinaryTrials = [getTrial('014'), getTrial('015'), getTrial('016'), getTrial('017')];
+  // 20 ordinary trials (non-manipulated) (four will get replaced with manipulated ones)
+  var ordinaryTrials = [getTrial('014'), getTrial('015'), getTrial('016'), getTrial('017'), getTrial('018'), getTrial('019'), getTrial('020'), getTrial('021'), getTrial('022'), getTrial('023'), getTrial('024'), getTrial('025'), getTrial('026'), getTrial('027'), getTrial('028'), getTrial('029'), getTrial('030'), getTrial('031'), getTrial('032'), getTrial('033')];
+  //var ordinaryTrials = [getTrial('014'), getTrial('015'), getTrial('016'), getTrial('017')];
   // Save a copy to be used in post trials
   var originalTrials = angular.copy(ordinaryTrials);
   // Shuffle the trials
@@ -96,7 +96,7 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
     'userId': userId,
     'experimentId': experimentId,
     'user': {
-      'sex': 'male',
+      'sex': 'female',
       'age': 25,
       'device': 'mouse',
       'devicePosition': 'right',
@@ -135,6 +135,8 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
         });
     }
   };
+  console.log(experiment.trials.length);
+  console.log(experiment.postTrials.length);
   console.log(experiment);
   return experiment;
 }]);

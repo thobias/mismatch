@@ -6,6 +6,15 @@ body {
   transition: 0.2s;
 }
 
+h1, h2, h3, span, p, li {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor:default;
+}
+select {
+  cursor: pointer;
+}
 h1 {
   margin: 0;
   text-align: center;
@@ -98,6 +107,7 @@ button {
   height: 14em;
   width: 10em;
   position: absolute;
+  -moz-user-select:none;
   -webkit-user-select:none;
   user-select: none;
 }
@@ -247,13 +257,17 @@ button {
   }
   label {
     cursor: pointer;
+    -moz-user-select:none;
     -webkit-user-select:none;
+    user-select:none;
   }
 
 .countdownButton {
   position: relative;
   cursor: pointer;
+  -moz-user-select:none;
   -webkit-user-select:none;
+  user-select:none;
 }
 .countdownButton-fill {
   background-color: #fff;
@@ -265,8 +279,29 @@ button {
   bottom: -1px;
   border-radius: 50%;
   cursor: pointer;
+  -moz-user-select:none;
   -webkit-user-select:none;
+  user-select:none;
 }
 .alert-text {
   color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  text-align: center;
+  right: 0;
 }
+.important-text {
+  color: #A8073C;
+  font-style: italic;
+}
+
+.scale-legend {
+  font-size: 0.8em;
+}
+  .scale-legend-left {
+    margin-right: 0.8em;
+  }
+  .scale-legend-right {
+    margin-left: 0.8em;
+  }

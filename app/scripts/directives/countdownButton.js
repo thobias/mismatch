@@ -13,13 +13,13 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
           current = 0,
           time = 0,
           timer = false,
-          alert = $('<h1 class="alert-text">Don\'t move the cursor</h1>').appendTo(body).hide(),
+          alert = $('<h1 class="alert-text">Please return the cursor to the white dot below to continue</h1>').appendTo(body).hide(),
           faces = $('.face');
 
       container.on('mouseover', function() {
         container.on('mouseout', function() {
           container.css({'cursor': 'none'});
-          body.css({'background': '#ff0000'});
+          body.css({'background': '#A8073C'});
           faces.css({'opacity': 0});
           alert.show();
         });
@@ -62,7 +62,7 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
       scope.$watch( attrs.hold , function(val) {
         if(val) {
           container.on('mouseout', function() {
-            body.css({'background': '#ff0000'});
+            body.css({'background': '#A8073C'});
             faces.css({'opacity': 0});
             scope.$emit('mouseOut');
             alert.show();

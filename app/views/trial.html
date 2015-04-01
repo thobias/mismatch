@@ -30,6 +30,7 @@
 <div ng-show="trial.showScale && !trial.waiting" class="controls">
   <h3>How sure are you?</h3>
   <div class="l-center">
+    <span class="scale-legend scale-legend-left">Less sure</span>
     <button class="radio-button" ng-click="trial.rate(1)"><span>1</span></button>
     <button class="radio-button" ng-click="trial.rate(2)"><span>2</span></button>
     <button class="radio-button" ng-click="trial.rate(3)"><span>3</span></button>
@@ -37,6 +38,7 @@
     <button class="radio-button" ng-click="trial.rate(5)"><span>5</span></button>
     <button class="radio-button" ng-click="trial.rate(6)"><span>6</span></button>
     <button class="radio-button" ng-click="trial.rate(7)"><span>7</span></button>
+    <span class="scale-legend scale-legend-right">More sure</span>
   </div>
 </div>
 
