@@ -45,6 +45,10 @@ angular.module('mismatchControllers')
     $scope.startTrial         = startTrial;
     $scope.finished           = false;
 
+    $scope.$on('mouseOut',function() {
+      $scope.trial.data.mouseOut = true;
+    });
+
   }])
   .controller('ViewDataCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.input = '';

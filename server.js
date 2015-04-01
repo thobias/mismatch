@@ -43,6 +43,7 @@ var trialSchema = new mongoose.Schema({
     'choiceId': String,
     'rating': Number,
     'reason': String,
+    'mouseOut': Boolean,
     'timing': {
       'start': Number,
       'choice': Number,

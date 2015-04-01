@@ -64,6 +64,7 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
           container.on('mouseout', function() {
             body.css({'background': '#ff0000'});
             faces.css({'opacity': 0});
+            scope.$emit('mouseOut');
             alert.show();
           });
           container.on('mouseover', function() {

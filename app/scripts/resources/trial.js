@@ -37,6 +37,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         'detected': null,
         'previous': null,
         'switched': false,
+        'mouseOut': false,
         'timing': {
           'start': null,
           'choice': null,
