@@ -5,7 +5,7 @@
     </div>
     <div class="back">
       <div ng-show="!trial.showStart && !trial.images[1].show && !trial.waiting && !trial.showButton && trial.data.choice == null" class="face-target" ng-click="trial.choiceMade(0)"></div>
-     <img class="face-image face-back" src="https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg">
+     <img class="face-image face-back" ng-src="{{trial.backImage[1]}}">
     </div>
   </div>
 </div>
@@ -17,21 +17,18 @@
     </div>
     <div class="back">
       <div ng-show="!trial.showStart && !trial.images[0].show && !trial.waiting && !trial.showButton && trial.data.choice == null" class="face-target" ng-click="trial.choiceMade(1)"></div>
-     <img class="face-image face-back" src="https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg">
+     <img class="face-image face-back" ng-src="{{trial.backImage[0]}}">
     </div>
   </div>
 </div>
 
 <div class="controls">
   <h3 ng-show="trial.showStart">Click here to start</h3>
-  <!--<button ng-click="startTrial()" class="precise-button"></button>-->
   <countdown-button ng-click="startTrial()" hold="trial.holdMouse" ng-show="trial.showStart || trial.showButton" time="trial.waiting"></button>
-  <!-- <button countdownButton time="2000" onComplete="startTracking()" class="countdownButton"></button> -->
 </div>
 
 <div ng-show="trial.showScale && !trial.waiting" class="controls">
   <h3>How sure are you?</h3>
-  <!--<input type="range" min="1" max="7" name="rating">-->
   <div class="l-center">
     <button class="radio-button" ng-click="trial.rate(1)"><span>1</span></button>
     <button class="radio-button" ng-click="trial.rate(2)"><span>2</span></button>

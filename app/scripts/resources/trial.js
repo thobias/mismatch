@@ -73,6 +73,12 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       showImage: function(imageIndex) {
         trial.images[imageIndex].show = true;
       },
+      backImage: function() {
+        if( Math.floor(Math.random() * 2) === 1 ) {
+          return ['http://www.maxplayingcards.com/en/wp-content/uploads/2012/07/Pr1meRedBack.jpg', 'https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg'];
+        }
+        return ['https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg', 'http://www.maxplayingcards.com/en/wp-content/uploads/2012/07/Pr1meRedBack.jpg'];
+      }(),
       choiceMade: function(choiceIndex) {
         var results = mouseTracking.stopTracking();
         trial.data.timing.choice = window.performance.now() - trial.data.timing.start;
