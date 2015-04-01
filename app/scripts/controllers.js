@@ -9,7 +9,6 @@ angular.module('mismatchControllers')
         started = false;
 
     var getTrial = function(index) {
-      console.log($scope.experiment);
       return $scope.experiment.trials[index] || false;
     };
 
@@ -134,15 +133,20 @@ angular.module('mismatchControllers')
       var myTrial = $scope.experiment.postTrials[index] || false;
       if(!myTrial) {return false;}
 
-      myTrial.detected = function() {
-        var id = myTrial.id;
-        $.each($scope.experiment.trials, function() {
-          if(this.id === id) { return this.data.detected; }
-        });
-        return false;
-      }();
+      var detected = false;
+      var previous = false;
 
-      console.log(myTrial);
+      $.each($scope.experiment.trials, function() {
+        if(this.id == myTrial.id) {
+          detected = this.data.detected;
+          previous = this.data.choice;
+          return;
+        }
+      });
+
+      myTrial.data.detected = detected;
+      myTrial.data.previous = previous;
+
       return myTrial;
     };
 

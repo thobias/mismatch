@@ -7,7 +7,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       id: spec.id,
       experimentId: spec.experimentId,
       userId: spec.userId,
-      type: spec.trial || 'trial',
+      type: spec.type || 'trial',
       images: [
         {
           'url': spec.image1,
@@ -35,6 +35,8 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         'rating': null,
         'reason': null,
         'detected': null,
+        'previous': null,
+        'switched': false,
         'timing': {
           'start': null,
           'choice': null,
@@ -82,6 +84,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         trial.toggleImages(false);
 
         if(trial.onlyChoose) {
+          trial.data.switched = (trial.data.previous != trial.data.choice);
           trial.finish();
           return true;
         }
