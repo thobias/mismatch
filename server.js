@@ -10,6 +10,9 @@ var express = require('express')
 var experimentSchema = new mongoose.Schema({
   'userId': String,
   'experimentId': String,
+  'debriefedFeedback': String,
+  'initialFeedback': String,
+  'noticed': Boolean,
   'user': {
     'sex': String,
     'age': Number,
@@ -32,6 +35,7 @@ var trialSchema = new mongoose.Schema({
   'userId': String,
   'experimentId': String,
   'manipulated': Boolean,
+  'type': String,
   'data': {
     'tracking': {},
     'detected': Boolean,
@@ -72,6 +76,18 @@ app.post('/experiments', function (req, res) {
     console.log(err);
     res.send(201, newExperiment);
   });
+});
+
+app.put('/experiments/:id', function (req, res) {
+  var id = req.params.id;
+
+  req.body.updatedAt = Date.now();
+
+  Experiment.findByIdAndUpdate(id, req.body, function(err, entity) {
+    console.log(err);
+    res.status(200).send(entity);
+  });
+
 });
 
 // Add new trial

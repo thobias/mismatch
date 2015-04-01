@@ -5,9 +5,9 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
   return function(spec) {
     var trial = {
       id: spec.id,
-      experiment: $rootScope.experiment._id,
-      experimentId: $rootScope.experiment.experimentId,
-      userId: $rootScope.experiment.userId,
+      experimentId: spec.experimentId,
+      userId: spec.userId,
+      type: spec.trial || 'trial',
       images: [
         {
           'url': spec.image1,
@@ -31,8 +31,10 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       data: {
         'tracking': null,
         'choice': null,
+        'choiceId': null,
         'rating': null,
         'reason': null,
+        'detected': null,
         'timing': {
           'start': null,
           'choice': null,

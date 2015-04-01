@@ -4,39 +4,28 @@ angular.module('mismatchControllers')
   .controller('StartCtrl', ['$scope', '$rootScope', 'experiment', function($scope, $rootScope, experiment) {
     $rootScope.experiment = experiment;
   }])
-  .controller('TrialCtrl', ['$scope', 'trials', 'trial', function($scope, trials, trial) {
+  .controller('TrialCtrl', ['$scope', function($scope) {
     var saved = false,
         started = false;
 
     var getTrial = function(index) {
-
-      if( !trials[ index ] || trials[ index ] === undefined) {
-        return false;
-      }
-
-      return trial({
-        'id': trials[ index ].id,
-        'image1': trials[ index ].image1,
-        'image2': trials[ index ].image2,
-        'manipulated': trials[ index ].manipulated
-      });
-
+      console.log($scope.experiment);
+      return $scope.experiment.trials[index] || false;
     };
 
     var startTrial = function() {
+
       if(!saved) {
         $scope.experiment.save();
         saved = true;
       }
 
-      if(started) {
-        return;
-      }
+      if(started) { return; }
 
       started = true;
 
       $scope.trial.start().then(function(data) {
-        $scope.trial.data = angular.copy(data);
+        $scope.trial.data = data;
         $scope.trial.save();
         $scope.currentTrialIndex++;
 
@@ -104,22 +93,10 @@ angular.module('mismatchControllers')
 
 
   }])
-  .controller('PreTrialCtrl', ['$scope', 'mouseTracking', 'trials', 'trial', function($scope, mouseTracking, trials, trial) {
-    var trials = trials;
+  .controller('PreTrialCtrl', ['$scope', 'mouseTracking', function($scope, mouseTracking) {
 
     var getTrial = function(index) {
-
-      if( !trials[ index ] || trials[ index ] === undefined) {
-        return false;
-      }
-
-      return trial({
-        'id': trials[ index ].id,
-        'image1': trials[ index ].image1,
-        'image2': trials[ index ].image2,
-        'manipulated': trials[ index ].manipulated
-      });
-
+      return $scope.experiment.preTrials[index] || false;
     };
 
     var startTrial = function() {
@@ -150,45 +127,52 @@ angular.module('mismatchControllers')
     $scope.finished           = false;
 
   }])
-  .controller('PostTrialCtrl', ['$scope', '$rootScope', '$location', 'mouseTracking', 'trials', 'trial', function($scope, $rootScope, $location, mouseTracking, trials, trial) {
-    var trials = trials;
+  .controller('PostTrialCtrl', ['$scope', '$location', 'mouseTracking', function($scope, $location, mouseTracking) {
+    var started = false;
 
     var getTrial = function(index) {
+      var myTrial = $scope.experiment.postTrials[index] || false;
+      if(!myTrial) {return false;}
 
-      if( !trials[ index ] || trials[ index ] === undefined) {
+      myTrial.detected = function() {
+        var id = myTrial.id;
+        $.each($scope.experiment.trials, function() {
+          if(this.id === id) { return this.data.detected; }
+        });
         return false;
-      }
+      }();
 
-      return trial({
-        'id': trials[ index ].id,
-        'image1': trials[ index ].image1,
-        'image2': trials[ index ].image2,
-        'manipulated': false,
-        'onlyChoose': true
-      });
-
+      console.log(myTrial);
+      return myTrial;
     };
 
     var startTrial = function() {
+      if(started) { return; }
+      started = true;
 
       $scope.trial.start().then(function(data) {
 
-        trials[$scope.currentTrialIndex].data = angular.copy(data);
+        $scope.trial.data = angular.copy(data);
+        $scope.trial.save();
 
         $scope.currentTrialIndex++;
 
         if( !getTrial( $scope.currentTrialIndex ) ) {
           $scope.finished = true;
+          started = false;
           return true;
         }
 
         $scope.trial = getTrial( $scope.currentTrialIndex );
+        started = false;
       });
 
     };
 
     var completeExperiment = function() {
-      console.log($rootScope.experiment);
+      console.log($scope.experiment);
+      // Save extra input data
+      $scope.experiment.finish();
       // Contact Mechanical Turk
       $location.path('/start');
     };
