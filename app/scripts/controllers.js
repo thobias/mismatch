@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mismatchControllers')
-  .controller('StartCtrl', ['$scope', '$rootScope', 'experiment', function($scope, $rootScope, experiment) {
+  .controller('StartCtrl', ['$rootScope', 'experiment', function($rootScope, experiment) {
     $rootScope.experiment = experiment;
   }])
   .controller('TrialCtrl', ['$scope', function($scope) {
@@ -50,7 +50,7 @@ angular.module('mismatchControllers')
     });
 
   }])
-  .controller('ViewDataCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+  .controller('ViewDataCtrl', ['$scope', function($scope) {
     $scope.input = '';
     $scope.result = '';
 
@@ -110,7 +110,7 @@ angular.module('mismatchControllers')
         console.log('Updating frequency set to ' + mouseTracking.updatingFrequency + ' ms (' + 1000/mouseTracking.updatingFrequency + ' hz)');
       });
 
-      $scope.trial.start().then(function(data) {
+      $scope.trial.start().then(function() {
         $scope.currentTrialIndex++;
 
         if( !getTrial( $scope.currentTrialIndex ) ) {
@@ -130,7 +130,7 @@ angular.module('mismatchControllers')
     $scope.finished           = false;
 
   }])
-  .controller('PostTrialCtrl', ['$scope', '$location', 'mouseTracking', function($scope, $location, mouseTracking) {
+  .controller('PostTrialCtrl', ['$scope', '$location', function($scope, $location) {
     var started = false;
 
     var getTrial = function(index) {

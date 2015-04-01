@@ -14,36 +14,15 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServic
       }).
       when('/trial', {
         templateUrl: 'views/firstTrials.html',
-        controller: 'TrialCtrl',
-        resolve: {
-          trials: function($location, $rootScope) {
-            if(!$rootScope.experiment) { $location.path('/start'); }
-
-            return $rootScope.experiment['trials'];
-          },
-        }
+        controller: 'TrialCtrl'
       }).
       when('/preTrial', {
         templateUrl: 'views/preTrial.html',
-        controller: 'PreTrialCtrl',
-        resolve: {
-          trials: function($location, $rootScope) {
-            if(!$rootScope.experiment) { $location.path('/start'); }
-
-            return $rootScope.experiment['preTrials'];
-          },
-        }
+        controller: 'PreTrialCtrl'
       }).
       when('/postTrial', {
         templateUrl: 'views/postTrials.html',
-        controller: 'PostTrialCtrl',
-        resolve: {
-          trials: function($location, $rootScope) {
-            if(!$rootScope.experiment) { $location.path('/start'); }
-
-            return $rootScope.experiment['postTrials'];
-          },
-        }
+        controller: 'PostTrialCtrl'
       }).
       when('/view', {
         templateUrl: 'views/viewData.html',

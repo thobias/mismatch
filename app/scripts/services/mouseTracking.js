@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) {
-  var body = $('body');
 
   var tracker = {
     position: {

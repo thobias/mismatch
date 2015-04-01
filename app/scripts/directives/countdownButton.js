@@ -28,7 +28,7 @@ angular.module('mismatchDirectives').directive('countdownButton', function() {
           container.css({'cursor': 'pointer'});
           faces.css({'opacity': 1});
           alert.hide();
-        })
+        });
       });
 
       var render = function(percent) {

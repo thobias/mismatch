@@ -72,6 +72,10 @@ var server = app.listen(3000, function() {
   console.log('Example app listening at http://%s:%s', host, port);
 });
 
+/*
+  Routes
+*/
+
 // Add new experiment
 app.post('/experiments', function (req, res) {
   Experiment.create(req.body, function(err, newExperiment) {
@@ -102,13 +106,12 @@ app.put('/experiments/:id', function (req, res) {
 
 });
 
-// Get user
+// Get user with experiment and all trials
 app.get('/users/:id', function (req, res) {
   var id = req.params.id;
 
   Experiment.find({'userId': id}, function(err, experiment) {
     console.log(err);
-    // res.send(entity);
     Trial.find({'userId': id}, function(err, trials) {
       console.log(err);
       res.send('<pre>'+experiment+'</pre> <p>trials</p> <pre>'+trials+'<pre>');
