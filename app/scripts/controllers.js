@@ -143,7 +143,7 @@ angular.module('mismatchControllers')
       $.each($scope.experiment.trials, function() {
         if(this.id == myTrial.id) {
           detected = this.data.detected;
-          previous = this.data.choice;
+          previous = this.data.choiceId;
           return;
         }
       });

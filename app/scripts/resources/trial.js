@@ -10,12 +10,14 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       type: spec.type || 'trial',
       images: [
         {
-          'url': spec.image1,
+          'id': spec.id+'AA',
+          'url': 'images/faces/'+spec.id+'AA.jpg',
           'show': false,
           'replace': false
         },
         {
-          'url': spec.image2,
+          'id': spec.id+'BB',
+          'url': 'images/faces/'+spec.id+'BB.jpg',
           'show': false,
           'replace': false
         }
@@ -76,22 +78,22 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       },
       backImage: (function() {
         if( Math.floor(Math.random() * 2) === 1 ) {
-          return ['http://www.maxplayingcards.com/en/wp-content/uploads/2012/07/Pr1meRedBack.jpg', 'https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg'];
+          return ['images/cardback2o.jpg', 'images/cardback1o.jpg'];
         }
-        return ['https://s-media-cache-ak0.pinimg.com/originals/3d/e3/40/3de340dc82f10724b4b61e8ef2f1f506.jpg', 'http://www.maxplayingcards.com/en/wp-content/uploads/2012/07/Pr1meRedBack.jpg'];
+        return ['images/cardback1o.jpg', 'images/cardback2o.jpg'];
       }()),
-      choiceMade: function(choiceIndex) {
+      choiceMade: function(choiceIndex, choiceID) {
         var results = mouseTracking.stopTracking();
         trial.data.timing.choice = window.performance.now() - trial.data.timing.start;
 
         trial.data.tracking   = angular.copy(results);
         trial.data.choice     = choiceIndex;
-        trial.data.choiceId   = trial.id + (choiceIndex === 0 ? 'AA' : 'BB');
+        trial.data.choiceId   = choiceID;
 
         trial.toggleImages(false);
 
         if(trial.onlyChoose) {
-          trial.data.switched = (trial.data.previous != trial.data.choice);
+          trial.data.switched = (trial.data.previous != trial.data.choiceId);
           trial.finish();
           return true;
         }
@@ -153,6 +155,8 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
           });
       }
     };
+    var engine = Random.engines.mt19937().autoSeed();
+    Random.shuffle( engine, trial.images );
     return trial;
   };
 

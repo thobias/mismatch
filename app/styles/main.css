@@ -154,7 +154,6 @@ button {
   .flip-container {
     perspective: 1000;
   }
-    /* flip the pane when hovered */
     .flip-container.is-flipped .flipper {
       transform: rotateY(180deg);
     }
@@ -167,7 +166,6 @@ button {
     height: 274px;
   }
 
-  /* flip speed goes here */
   .flipper {
     transition: 0.6s;
     transform-style: preserve-3d;

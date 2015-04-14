@@ -4,8 +4,6 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   var getTrial = function(id, manipulated) {
     return trial({
       'id': id,
-      'image1': 'images/faces/'+id+'AA.jpg',
-      'image2': 'images/faces/'+id+'BB.jpg',
       'userId': userId,
       'experimentId': experimentId,
       'manipulated': manipulated || false
@@ -67,8 +65,6 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   $.each(postTrials, function(i) {
     postTrials[i] = trial({
       'id': postTrials[i].id,
-      'image1': 'images/faces/'+postTrials[i].id+'AA.jpg',
-      'image2': 'images/faces/'+postTrials[i].id+'BB.jpg',
       'userId': postTrials[i].userId,
       'experimentId': postTrials[i].experimentId,
       'manipulated': postTrials[i].manipulated || false,
