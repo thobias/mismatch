@@ -59,7 +59,7 @@ var Trial = mongoose.model('Trial', trialSchema);
 app.use(express.static('app'));
 app.use(bodyParser.json({'limit': '50mb'}));
 
-var server = app.listen(3000, function() {
+var server = app.listen(27017, function() {
   mongoose.connect('mongodb://localhost/mismatch');
 
   var db = mongoose.connection;
