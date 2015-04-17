@@ -13,6 +13,7 @@ var experimentSchema = new mongoose.Schema({
   'debriefedFeedback': String,
   'initialFeedback': String,
   'noticed': Boolean,
+  'completed': Boolean,
   'user': {
     'sex': String,
     'age': Number,
@@ -40,6 +41,7 @@ var trialSchema = new mongoose.Schema({
     'tracking': {},
     'detected': Boolean,
     'switched': Boolean,
+    'choice': Number,
     'choiceId': String,
     'rating': Number,
     'reason': String,

@@ -119,7 +119,8 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
       var update = {
         'initialFeedback': experiment.initialFeedback,
         'noticed': experiment.noticed,
-        'debriefedFeedback':experiment.debriefedFeedback
+        'debriefedFeedback':experiment.debriefedFeedback,
+        'completed': true
       };
 
       $http.put('/experiments/'+experiment._id, update).
