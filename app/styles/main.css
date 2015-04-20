@@ -200,6 +200,9 @@ button {
   left:0;
   right: 0;
 }
+  .controls-up {
+    bottom:50px;
+  }
 
 .discrete {
   color: #666;
