@@ -1,21 +1,22 @@
-<div ng-class="{'is-flipped': !trial.images[0].show, 'replace': trial.images[0].replace, 'chosen': trial.data.choice == 0 && !trial.images[0].replace}" class="flip-container face face-left">
+
+<div ng-class="{'is-flipped': trial.images[0].show, 'replace': trial.images[0].replace, 'chosen': trial.data.choice == 0 && !trial.images[0].replace}" class="flip-container face face-left">
   <div class="flipper">
-    <div class="front">
+    <div class="back">
       <img class="face-image" ng-src="{{trial.images[0].url}}">
     </div>
-    <div class="back">
+    <div class="front">
       <div ng-show="!trial.showStart && !trial.images[1].show && !trial.waiting && !trial.showButton && trial.data.choice == null" class="face-target" ng-click="trial.choiceMade(0, trial.images[0].id)"></div>
      <img class="face-image face-back" ng-src="{{trial.backImage[1]}}">
     </div>
   </div>
 </div>
 
-<div ng-class="{'is-flipped': !trial.images[1].show, 'replace': trial.images[1].replace, 'chosen': trial.data.choice == 1 && !trial.images[1].replace}" class="flip-container face face-right">
+<div ng-class="{'is-flipped': trial.images[1].show, 'replace': trial.images[1].replace, 'chosen': trial.data.choice == 1 && !trial.images[1].replace}" class="flip-container face face-right">
   <div class="flipper">
-    <div class="front">
+    <div class="back">
       <img class="face-image" ng-src="{{trial.images[1].url}}">
     </div>
-    <div class="back">
+    <div class="front">
       <div ng-show="!trial.showStart && !trial.images[0].show && !trial.waiting && !trial.showButton && trial.data.choice == null" class="face-target" ng-click="trial.choiceMade(1, trial.images[1].id)"></div>
      <img class="face-image face-back" ng-src="{{trial.backImage[0]}}">
     </div>
