@@ -155,7 +155,7 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
       var update = {
         'initialFeedback': experiment.initialFeedback,
         'noticed': experiment.noticed,
-        'debriefedFeedback':experiment.debriefedFeedback,
+        'timesFeedback':experiment.debriefedFeedback,
         'completed': true
       };
 

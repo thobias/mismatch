@@ -10,7 +10,7 @@ var express = require('express')
 var experimentSchema = new mongoose.Schema({
   'userId': String,
   'experimentId': String,
-  'debriefedFeedback': String,
+  'timesFeedback': String,
   'initialFeedback': String,
   'noticed': Boolean,
   'completed': Boolean,
