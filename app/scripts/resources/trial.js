@@ -11,13 +11,13 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       images: [
         {
           'id': spec.id+'AA',
-          'url': 'images/faces/'+spec.id+'AA.jpg',
+          'url': 'images/faces/SHINEd_'+spec.id+'AA.jpg',
           'show': false,
           'replace': false
         },
         {
           'id': spec.id+'BB',
-          'url': 'images/faces/'+spec.id+'BB.jpg',
+          'url': 'images/faces/SHINEd_'+spec.id+'BB.jpg',
           'show': false,
           'replace': false
         }

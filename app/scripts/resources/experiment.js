@@ -15,15 +15,15 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
 
   // Generate user and experiment id
   var userId = Date.now() + Random.uuid4(engine),
-      experimentId = 2;
+      experimentId = 20150420;
 
   // 8 potentially manipulated trials
-  var available = [getTrial('006', true), getTrial('007', true), getTrial('008', true), getTrial('009', true), getTrial('010', true), getTrial('011', true), getTrial('012', true), getTrial('013', true)];
-  // Pick 4 of them and shuffle the order
-  var chosen = Random.shuffle( engine, Random.sample(engine, available, 4) );
-  // 20 ordinary trials (non-manipulated) (four will get replaced with manipulated ones)
-  var ordinaryTrials = [getTrial('014'), getTrial('015'), getTrial('016'), getTrial('017'), getTrial('018'), getTrial('019'), getTrial('020'), getTrial('021'), getTrial('022'), getTrial('023'), getTrial('024'), getTrial('025'), getTrial('026'), getTrial('027'), getTrial('028'), getTrial('029'), getTrial('030'), getTrial('031'), getTrial('032'), getTrial('033')];
-  //var ordinaryTrials = [getTrial('014'), getTrial('015'), getTrial('016'), getTrial('017')];
+  var available = [getTrial('004', true), getTrial('006', true), getTrial('012', true), getTrial('013', true), getTrial('038', true), getTrial('047', true), getTrial('048', true), getTrial('049', true)];
+  // Pick 5 of them and shuffle the order
+  var chosen = Random.shuffle( engine, Random.sample(engine, available, 5) );
+  // 25 ordinary trials (non-manipulated) (four will get replaced with manipulated ones)
+  var ordinaryTrials = [getTrial('007'), getTrial('008'), getTrial('009'), getTrial('011'), getTrial('005'), getTrial('015'), getTrial('019'), getTrial('020'), getTrial('021'), getTrial('022'), getTrial('024'), getTrial('025'), getTrial('027'), getTrial('028'), getTrial('031'), getTrial('032'), getTrial('033'), getTrial('034'), getTrial('036'), getTrial('037'), getTrial('040'), getTrial('042'), getTrial('043'), getTrial('044'), getTrial('046')];
+  //var ordinaryTrials = [getTrial('015')];
   // Save a copy to be used in post trials
   var originalTrials = angular.copy(ordinaryTrials);
   // Shuffle the trials
@@ -58,7 +58,8 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   });
 
   // Choose post-trials
-  var postTrials = Random.sample( engine, originalTrials, 4);
+  // SE TILL ATT BARA PLOCKA SÅNNA SOM ÄR MED!
+  var postTrials = Random.sample( engine, originalTrials, 5);
   // Add chosen manipulated trials
   postTrials = postTrials.concat( chosen );
   // Create new objects for the trials to make sure they are not linked from before
@@ -76,8 +77,8 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   postTrials = Random.shuffle( engine, postTrials );
 
   // Choose pre-trials
-  //var preTrials = [getTrial('001'), getTrial('002'), getTrial('003'), getTrial('004'), getTrial('005')];
-  var preTrials = [getTrial('001')];
+  var preTrials = [getTrial('001'), getTrial('002'), getTrial('003')];
+  //var preTrials = [getTrial('001')];
   // Shuffle
   preTrials = Random.shuffle( engine, preTrials );
 
