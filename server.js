@@ -36,6 +36,7 @@ var trialSchema = new mongoose.Schema({
   'userId': String,
   'experimentId': String,
   'manipulated': Boolean,
+  'target': Boolean,
   'type': String,
   'data': {
     'tracking': {},

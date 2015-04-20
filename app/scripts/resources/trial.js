@@ -24,6 +24,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       ],
       manipulated: spec.manipulated || false,
       onlyChoose: spec.onlyChoose || false,
+      target: spec.target || false,
       showScale: false,
       showStart: true,
       showFeedback: false,
