@@ -19,8 +19,8 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
       experimentId = 2015042002;
 
   // 12 potentially manipulated trials in pairs (targets)
-  var pairs1 = [getTrial('004', true), getTrial('006', true), getTrial('047', true), getTrial('008', true), getTrial('049', true), getTrial('011', true)];
-  var pairs2 = [getTrial('012', true), getTrial('013', true), getTrial('038', true), getTrial('007', true), getTrial('048', true), getTrial('009', true)];
+  var pairs1 = [getTrial('024', true), getTrial('006', true), getTrial('047', true), getTrial('0015', true), getTrial('049', true), getTrial('011', true)];
+  var pairs2 = [getTrial('027', true), getTrial('005', true), getTrial('038', true), getTrial('0019', true), getTrial('048', true), getTrial('009', true)];
   var manipulatedTargets = [];
   var nonManipulatedTargets = [];
 
@@ -37,7 +37,7 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   targets = pairs1.concat( pairs2 );
 
   // 24 ordinary trials (non-manipulated)
-  var ordinaryTrials = [getTrial('001'), getTrial('002'), getTrial('003'), getTrial('005'), getTrial('015'), getTrial('019'), getTrial('020'), getTrial('021'), getTrial('022'), getTrial('024'), getTrial('025'), getTrial('027'), getTrial('028'), getTrial('031'), getTrial('032'), getTrial('033'), getTrial('034'), getTrial('036'), getTrial('037'), getTrial('040'), getTrial('042'), getTrial('043'), getTrial('044'), getTrial('046')];
+  var ordinaryTrials = [getTrial('001'), getTrial('002'), getTrial('003'), getTrial('013'), getTrial('008'), getTrial('007'), getTrial('020'), getTrial('021'), getTrial('022'), getTrial('004'), getTrial('025'), getTrial('012'), getTrial('028'), getTrial('031'), getTrial('032'), getTrial('033'), getTrial('034'), getTrial('036'), getTrial('037'), getTrial('040'), getTrial('042'), getTrial('043'), getTrial('044'), getTrial('046')];
 
   // Add non-manipulated targets to ordinary trials
   ordinaryTrials = ordinaryTrials.concat( nonManipulatedTargets );
