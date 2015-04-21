@@ -39,7 +39,13 @@ var trialSchema = new mongoose.Schema({
   'target': Boolean,
   'type': String,
   'data': {
-    'tracking': {},
+    'tracking': [
+      {
+        'x': String,
+        'y': String,
+        't': String
+      }
+    ],
     'detected': Boolean,
     'switched': Boolean,
     'choice': Number,
@@ -90,7 +96,7 @@ app.post('/experiments', function (req, res) {
 // Get experiment
 app.get('/experiments/:id', function (req, res) {
   var id = req.params.id;
-  Experiment.findById(id, function(err, entity) {
+  Experiment.find({'experimentId': id}, function(err, entity) {
     console.log(err);
     res.send(entity);
   });
@@ -115,13 +121,18 @@ app.get('/users/:id', function (req, res) {
 
   Experiment.find({'userId': id}, function(err, experiment) {
     console.log(err);
-    Trial.find({'userId': id}, function(err, trials) {
-      console.log(err);
-      res.send('<pre>'+experiment+'</pre> <p>trials</p> <pre>'+trials+'<pre>');
-    });
-
+    res.send(experiment);
   });
 
+});
+
+app.get('/trials/:id', function(req, res) {
+  var id = req.params.id;
+
+  Trial.find({'userId': id}, function(err, trials) {
+    console.log(err);
+    res.send(trials);
+  });
 });
 
 // Add new trial

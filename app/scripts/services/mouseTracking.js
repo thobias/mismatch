@@ -8,7 +8,7 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
       'y': 0
     },
     trackingTimer: null,
-    trackingData: "",
+    trackingData: [],
     updatingFrequency: 17.0,
     setUpdatingFrequency: function(updatingFrequency) {
       tracker.updatingFrequency = updatingFrequency;
@@ -49,6 +49,7 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
     },
     startTracking: function() {
       console.log('Tracking at ' + 1000/tracker.updatingFrequency + ' hz');
+      var startTime = window.performance.now();
 
       document.onmousemove = function(event) {
         tracker.position.x = event.clientX;
@@ -56,13 +57,18 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
       };
 
       tracker.trackingTimer = setInterval(function () {
-        tracker.trackingData += tracker.position.x + ', ' + tracker.position.y + ', ' + window.performance.now() + '\n';
+        tracker.trackingData.push({
+          'x': tracker.position.x,
+          'y': tracker.position.y,
+          't': window.performance.now() - startTime
+        });
+        //tracker.trackingData += tracker.position.x + ', ' + tracker.position.y + ', ' + window.performance.now() + '\n';
       }, tracker.updatingFrequency);
 
     },
     stopTracking: function() {
       tracker.result        = tracker.trackingData;
-      tracker.trackingData  = "";
+      tracker.trackingData  = [];
 
       clearInterval(tracker.trackingTimer);
       document.onmousemove = null;

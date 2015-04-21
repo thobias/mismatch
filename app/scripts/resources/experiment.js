@@ -16,11 +16,11 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
 
   // Generate user and experiment id
   var userId = Date.now() + Random.uuid4(engine),
-      experimentId = 2015042101;
+      experimentId = 2015042105;
 
   // 12 potentially manipulated trials in pairs (targets)
-  var pairs1 = [getTrial('024', true), getTrial('006', true), getTrial('047', true), getTrial('0015', true), getTrial('049', true), getTrial('011', true)];
-  var pairs2 = [getTrial('027', true), getTrial('005', true), getTrial('038', true), getTrial('0019', true), getTrial('048', true), getTrial('009', true)];
+  var pairs1 = [getTrial('024', true), getTrial('006', true), getTrial('047', true), getTrial('015', true), getTrial('049', true), getTrial('011', true)];
+  var pairs2 = [getTrial('027', true), getTrial('005', true), getTrial('038', true), getTrial('019', true), getTrial('048', true), getTrial('009', true)];
   var manipulatedTargets = [];
   var nonManipulatedTargets = [];
 

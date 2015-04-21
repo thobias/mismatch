@@ -28,6 +28,14 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServic
         templateUrl: 'views/viewData.html',
         controller: 'ViewDataCtrl'
       }).
+      when('/experiments/:id', {
+        templateUrl: 'views/viewExperiment.html',
+        controller: 'ExperimentCtrl'
+      }).
+      when('/users/:id', {
+        templateUrl: 'views/viewUser.html',
+        controller: 'UserCtrl'
+      }).
       otherwise({
         redirectTo: '/start'
       });
