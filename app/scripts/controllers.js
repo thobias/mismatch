@@ -192,4 +192,9 @@ angular.module('mismatchControllers')
     $scope.finished           = false;
     $scope.completeExperiment = completeExperiment;
 
+  }])
+  .controller('ExperimentCtrl', ['$scope', '$http', 'id', function($scope, $http, id) {
+    $http.get('/experiments/'+id).success(function(experiment) {
+      console.log(experiment);
+    });
   }]);
