@@ -178,11 +178,10 @@ angular.module('mismatchControllers')
     };
 
     var completeExperiment = function() {
-      console.log($scope.experiment);
       // Save extra input data
       $scope.experiment.finish();
       // Contact Mechanical Turk
-      $location.path('/start');
+      $location.path('/turk');
     };
 
     $scope.currentTrialIndex  = 0;

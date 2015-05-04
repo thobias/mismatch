@@ -40,6 +40,10 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServic
         templateUrl: 'views/viewUser.html',
         controller: 'UserCtrl'
       }).
+      when('/turk', {
+        templateUrl: 'views/turk.html',
+        controller: 'TurkCtrl'
+      }).
       otherwise({
         redirectTo: '/start'
       });
