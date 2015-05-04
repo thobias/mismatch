@@ -48,7 +48,6 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
       return defer.promise;
     },
     startTracking: function() {
-      console.log('Tracking at ' + 1000/tracker.updatingFrequency + ' hz');
       var startTime = window.performance.now();
 
       document.onmousemove = function(event) {

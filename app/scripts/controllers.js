@@ -106,8 +106,6 @@ angular.module('mismatchControllers')
 
       mouseTracking.calibration().then(function(updatingFrequency) {
         mouseTracking.setUpdatingFrequency(updatingFrequency);
-        // Save to experiment?
-        console.log('Updating frequency set to ' + mouseTracking.updatingFrequency + ' ms (' + 1000/mouseTracking.updatingFrequency + ' hz)');
       });
 
       $scope.trial.start().then(function() {
@@ -196,14 +194,12 @@ angular.module('mismatchControllers')
     $scope.experiments = null;
     $http.get('/experiments/'+$routeParams.id).success(function(experiments) {
       $scope.experiments = experiments;
-      console.log(experiments);
     });
   }])
   .controller('ExperimentsViewCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
     $scope.trials = null;
     $http.get('/experiments/'+$routeParams.id+'/trials').success(function(trials) {
       $scope.trials = trials;
-      console.log(trials);
     });
   }])
   .controller('TurkCtrl', ['$scope', function($scope) {
@@ -217,7 +213,6 @@ angular.module('mismatchControllers')
 
       $http.get('/trials/'+$routeParams.id).success(function(trials) {
         $scope.experiment.trials = trials;
-        console.log(trials);
       });
 
     });

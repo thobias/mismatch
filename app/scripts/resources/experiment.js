@@ -111,18 +111,6 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
   // Shuffle
   preTrials = Random.shuffle( engine, preTrials );
 
-  var out = '';
-  $.each(trials, function(i, trial) {
-    out = out + i + ', ' + trial.id + ', ' + (trial.target ? '1' : 0) + ' ' + (trial.manipulated ? '1' : 0) + '\n';
-  });
-  console.log(out);
-
-  var out = '';
-  $.each(postTrials, function(i, trial) {
-    out = out + i + ', ' + trial.id + ', ' + (trial.target ? '1' : 0) + ' ' + (trial.manipulated ? '1' : 0) + '\n';
-  });
-  console.log(out);
-
   // Complete experiment object
   var experiment = {
     'userId': userId,
@@ -149,10 +137,8 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
       $http.post('/experiments', experiment).
         success(function(data) {
           experiment._id = data._id;
-          console.log(data);
         }).
         error(function(data) {
-          console.log(data);
         });
     },
     finish: function() {
@@ -165,15 +151,11 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
 
       $http.put('/experiments/'+experiment._id, update).
         success(function(data) {
-          console.log(data);
         }).
         error(function(data) {
-          console.log(data);
         });
     }
   };
-  console.log(experiment.trials.length);
-  console.log(experiment.postTrials.length);
-  console.log(experiment);
+  console.log(experimentId);
   return experiment;
 }]);
