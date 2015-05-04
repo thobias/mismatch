@@ -193,11 +193,18 @@ angular.module('mismatchControllers')
     $scope.completeExperiment = completeExperiment;
 
   }])
-  .controller('ExperimentCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+  .controller('ExperimentsListCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
     $scope.experiments = null;
     $http.get('/experiments/'+$routeParams.id).success(function(experiments) {
       $scope.experiments = experiments;
       console.log(experiments);
+    });
+  }])
+  .controller('ExperimentsViewCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    $scope.trials = null;
+    $http.get('/experiments/'+$routeParams.id+'/trials').success(function(trials) {
+      $scope.trials = trials;
+      console.log(trials);
     });
   }])
   .controller('UserCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {

@@ -16,7 +16,7 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
 
   // Generate user and experiment id
   var userId = Date.now() + Random.uuid4(engine),
-      experimentId = 2015042105;
+      experimentId = 2015042201;
 
   // 12 potentially manipulated trials in pairs (targets)
   var pairs1 = [getTrial('024', true), getTrial('006', true), getTrial('047', true), getTrial('015', true), getTrial('049', true), getTrial('011', true)];
@@ -141,6 +141,10 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
     'preTrials': preTrials,
     'trials': trials,
     'postTrials': postTrials,
+    'initialFeedback': null,
+    'noticed': null,
+    'timesFeedback': null,
+    'completed': false,
     save: function() {
       $http.post('/experiments', experiment).
         success(function(data) {
@@ -155,7 +159,7 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
       var update = {
         'initialFeedback': experiment.initialFeedback,
         'noticed': experiment.noticed,
-        'timesFeedback':experiment.debriefedFeedback,
+        'timesFeedback':experiment.timesFeedback,
         'completed': true
       };
 

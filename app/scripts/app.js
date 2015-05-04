@@ -28,9 +28,13 @@ angular.module('mismatchApp', ['ngRoute', 'mismatchControllers', 'mismatchServic
         templateUrl: 'views/viewData.html',
         controller: 'ViewDataCtrl'
       }).
+      when('/experiments/:id/trials', {
+        templateUrl: 'views/viewExperimentTrials.html',
+        controller: 'ExperimentsViewCtrl'
+      }).
       when('/experiments/:id', {
         templateUrl: 'views/viewExperiment.html',
-        controller: 'ExperimentCtrl'
+        controller: 'ExperimentsListCtrl'
       }).
       when('/users/:id', {
         templateUrl: 'views/viewUser.html',

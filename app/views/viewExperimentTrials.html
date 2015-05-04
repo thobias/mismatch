@@ -1,0 +1,32 @@
+<table style="width:100%">
+  <thead>
+    <tr>
+      <td>id</td>
+      <td>x</td>
+      <td>y</td>
+      <td>t</td>
+      <td>target</td>
+      <td>manipulated</td>
+      <td>detected</td>
+      <td>switched</td>
+      <td>rating</td>
+      <td>rt</td>
+      <td>type</td>
+    </tr>
+  </thead>
+  <tbody ng-repeat="trial in trials">
+    <tr ng-repeat="row in trial.data.tracking">
+      <td>{{trial.id}}</td>
+      <td>{{row.x}}</td>
+      <td>{{row.y}}</td>
+      <td>{{row.t}}</td>
+      <td>{{trial.target}}</td>
+      <td>{{trial.manipulated}}</td>
+      <td>{{trial.data.detected}}</td>
+      <td>{{trial.data.switched}}</td>
+      <td>{{trial.data.rating}}</td>
+      <td>{{trial.data.timing.choice}}</td>
+      <td>{{trial.type}}</td>
+    </tr>
+  </tbody>
+</table>

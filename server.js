@@ -102,11 +102,31 @@ app.get('/experiments/:id', function (req, res) {
   });
 });
 
+app.get('/experiments/:id/trials', function (req, res) {
+  var id = req.params.id;
+  var out = "userId,id,x,y,t,manipulated,detected,switched,rating,rt,right,type,handedness\n";
+  res.set({'Content-Disposition':'attachment; filename="allData.csv"'});
+
+  Experiment.find({'experimentId': id}, function(err, experimentObj) {
+    console.log(experimentObj);
+    Trial.find({'experimentId': id, 'target': true, 'data.mouseOut': false}, function(err, trials) {
+      trials.forEach(function(trial) {
+        trial.data.tracking.forEach(function(row) {
+          out = out + trial.userId + "," + trial.id + "," + row.x + "," + row.y + "," + row.t + "," + trial.manipulated + "," + trial.data.detected + "," + trial.data.switched + "," + trial.data.rating + "," + trial.data.timing.choice + "," + trial.data.choice + "," + trial.type + "," + experimentObj[0].user.hand + "\n";
+        });
+      });
+      res.send(out);
+    });
+  });
+
+});
+
 // Update experiment
 app.put('/experiments/:id', function (req, res) {
   var id = req.params.id;
 
   req.body.updatedAt = Date.now();
+  console.log(req.body);
 
   Experiment.findByIdAndUpdate(id, req.body, function(err, entity) {
     console.log(err);
@@ -120,7 +140,7 @@ app.get('/users/:id', function (req, res) {
   var id = req.params.id;
 
   Experiment.find({'userId': id}, function(err, experiment) {
-    console.log(err);
+    //console.log(err);
     res.send(experiment);
   });
 
@@ -129,8 +149,8 @@ app.get('/users/:id', function (req, res) {
 app.get('/trials/:id', function(req, res) {
   var id = req.params.id;
 
-  Trial.find({'userId': id}, function(err, trials) {
-    console.log(err);
+  Trial.find({'userId': id, 'target': true, 'data.mouseOut': false}, function(err, trials) {
+    //console.log(err);
     res.send(trials);
   });
 });
@@ -141,7 +161,7 @@ app.post('/trials', function (req, res) {
   var myTrial = new Trial(req.body);
 
   myTrial.save(function(err, newTrial) {
-    console.log(err);
+    //console.log(err);
     res.status(201).send(newTrial);
   });
 
