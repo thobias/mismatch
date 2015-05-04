@@ -206,6 +206,9 @@ angular.module('mismatchControllers')
       console.log(trials);
     });
   }])
+  .controller('TurkCtrl', ['$scope', function($scope) {
+
+  }])
   .controller('UserCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
     $scope.experiment = null;
 

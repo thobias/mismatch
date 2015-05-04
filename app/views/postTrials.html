@@ -30,7 +30,7 @@
 
 </div>
 
-<div ng-show="finished" class="controls">
+<div ng-show="finished && experiment.initialFeedback.length > 2" class="controls">
   <h3>Click here to complete the experiment</h3>
   <button ng-click="completeExperiment()" class="precise-button"></button>
 </div>
