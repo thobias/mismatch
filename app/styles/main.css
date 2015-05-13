@@ -127,31 +127,32 @@ button {
   }
   .face-right {
     top: 0;
-    right: 0;
+    right: 100px;
   }
   .face-left {
     top: 0;
-    left: 0;
+    left: 100px;
   }
   .face-image {
-    width: 221px;
-    height: 274px;
+    width: 191px;
+    height: 238px;
   }
   .face-target {
     width: 60px;
     height: 60px;
-    border: 4px solid red;
     position: absolute;
-    top: 103px;
-    left: 76px;
+    top: 92px;
+    left: 66px;
     cursor: pointer;
     border-radius: 50%;
+    background-color: red;
+    opacity: 0.3;
   }
     .face-target:hover {
-      background-color: red;
+      opacity: 1;
     }
     .face-target:focus, .face-target:active {
-      background-color: red;
+      opacity: 1;
     }
 
 .is-hidden {
@@ -169,8 +170,8 @@ button {
     }
 
   .flip-container, .front, .back {
-    width: 221px;
-    height: 274px;
+    width: 191px;
+    height: 238px;
   }
 
   .flipper {
@@ -312,4 +313,13 @@ button {
   }
   .scale-legend-right {
     margin-left: 0.8em;
+  }
+
+  @media screen and ( min-height: 850px ){
+      .l-container {
+        width: 1000px;
+        height: 800px;
+        position: relative;
+        margin: 0 auto;
+      }
   }

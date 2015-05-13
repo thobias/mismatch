@@ -27,6 +27,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       target: spec.target || false,
       showScale: false,
       showStart: true,
+      showTargets: false,
       showFeedback: false,
       holdMouse: false,
       showButton: false,
@@ -57,15 +58,16 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
         $timeout(function() {
           trial.toggleImages(true);
           trial.data.timing.start = window.performance.now();
-          trial.waiting = 2600;
+          trial.waiting = 2000;
           // wait 2000ms + 600ms animation
-          trial.holdMouse = true;
+          //trial.holdMouse = true;
           $timeout(function() {
             trial.waiting = 0;
-            trial.holdMouse = false;
+            //trial.holdMouse = false;
             trial.showButton = false;
-            trial.toggleImages(false);
-          }, 2600);
+            trial.showTargets = true;
+            //trial.toggleImages(false);
+          }, 2000);
         }, 500);
 
         return trial.defer.promise;
@@ -73,6 +75,7 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
       toggleImages: function(show) {
         trial.images[0].show = show;
         trial.images[1].show = show;
+        trial.showTargets = show;
       },
       showImage: function(imageIndex) {
         trial.images[imageIndex].show = true;
