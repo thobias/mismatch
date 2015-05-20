@@ -194,7 +194,12 @@ angular.module('mismatchControllers')
     $scope.experiments = null;
     $http.get('/experiments/'+$routeParams.id).success(function(experiments) {
       $scope.experiments = experiments;
-    });
+
+      $.each(experiments, function() {
+        window.open('/experiments/'+$routeParams.id+'/trials/'+this.userId, '_blank', '');
+      });
+
+    })
   }])
   .controller('ExperimentsViewCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
     $scope.trials = null;
