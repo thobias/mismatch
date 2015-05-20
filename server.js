@@ -121,6 +121,30 @@ app.get('/experiments/:id/trials', function (req, res) {
 
 });
 
+app.get('/experiments/:id/trials/:user', function (req, res) {
+  var id = req.params.id;
+  var user = req.params.user;
+  var out = "userId,id,x,y,t,manipulated,detected,switched,rating,rt,right,type,handedness\n";
+  res.set({'Content-Disposition':'attachment; filename="'+user+'.csv"'});
+
+  Experiment.find({'experimentId': id, 'userId': user, 'completed': true}, function(err, experimentObj) {
+
+    Trial.find({'experimentId': id, 'target': true, 'data.mouseOut': false, 'userId': user}, function(err, trials) {
+      trials.forEach(function(trial) {
+        trial.data.tracking.forEach(function(row) {
+          if(row.t > 3700) {
+            out = out + trial.userId + "," + trial.id + "," + row.x + "," + row.y + "," + row.t + "," + trial.manipulated + "," + trial.data.detected + "," + trial.data.switched + "," + trial.data.rating + "," + trial.data.timing.choice + "," + trial.data.choice + "," + trial.type + "," + experimentObj[0].user.hand + "\n";
+          }
+        });
+      });
+
+      res.send(out);
+
+    });
+  });
+
+});
+
 // Update experiment
 app.put('/experiments/:id', function (req, res) {
   var id = req.params.id;
