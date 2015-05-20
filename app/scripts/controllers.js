@@ -191,6 +191,7 @@ angular.module('mismatchControllers')
 
   }])
   .controller('ExperimentsListCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    console.log('hej tobbe');
     $scope.experiments = null;
     $http.get('/experiments/'+$routeParams.id).success(function(experiments) {
       $scope.experiments = experiments;
