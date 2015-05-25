@@ -190,14 +190,22 @@ angular.module('mismatchControllers')
     $scope.completeExperiment = completeExperiment;
 
   }])
-  .controller('ExperimentsListCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+  .controller('ExperimentsListCtrl', ['$scope', '$http', '$routeParams', '$timeout', function($scope, $http, $routeParams, $timeout) {
     console.log('hej tobbe');
+
     $scope.experiments = null;
     $http.get('/experiments/'+$routeParams.id).success(function(experiments) {
-      $scope.experiments = experiments;
 
+      $scope.experiments = experiments;
+      var time = 2000;
       $.each(experiments, function() {
-        window.open('/experiments/'+$routeParams.id+'/trials/'+this.userId, '_blank', '');
+        var user = this;
+        var download = function() {
+          window.open('/experiments/'+$routeParams.id+'/trials/'+user.userId, '_blank', '')
+        };
+
+        $timeout( download, time);
+        time = time + 3000;
       });
 
     })

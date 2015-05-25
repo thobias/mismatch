@@ -96,7 +96,7 @@ app.post('/experiments', function (req, res) {
 // Get experiment
 app.get('/experiments/:id', function (req, res) {
   var id = req.params.id;
-  Experiment.find({'experimentId': id}, function(err, entity) {
+  Experiment.find({'experimentId': id, 'completed': true}, function(err, entity) {
     console.log(err);
     res.send(entity);
   });
@@ -104,15 +104,15 @@ app.get('/experiments/:id', function (req, res) {
 
 app.get('/experiments/:id/trials', function (req, res) {
   var id = req.params.id;
-  var out = "userId,id,x,y,t,manipulated,detected,switched,rating,rt,right,type,handedness\n";
+  var out = "userId,id,x,y,t,manipulated,detected,switched,rating,rt,right,type,handedness,screenHeight,noticed,noticedNr\n";
   res.set({'Content-Disposition':'attachment; filename="allData.csv"'});
 
   Experiment.find({'experimentId': id}, function(err, experimentObj) {
-    console.log(experimentObj);
-    Trial.find({'experimentId': id, 'target': true, 'data.mouseOut': false}, function(err, trials) {
+
+    Trial.find({'experimentId': id, 'target': true}, function(err, trials) {
       trials.forEach(function(trial) {
         trial.data.tracking.forEach(function(row) {
-          out = out + trial.userId + "," + trial.id + "," + row.x + "," + row.y + "," + row.t + "," + trial.manipulated + "," + trial.data.detected + "," + trial.data.switched + "," + trial.data.rating + "," + trial.data.timing.choice + "," + trial.data.choice + "," + trial.type + "," + experimentObj[0].user.hand + "\n";
+          out = out + trial.userId + "," + trial.id + "," + row.x + "," + row.y + "," + row.t + "," + trial.manipulated + "," + trial.data.detected + "," + trial.data.switched + "," + trial.data.rating + "," + trial.data.timing.choice + "," + trial.data.choice + "," + trial.type + "," + experimentObj[0].user.hand + "," + experimentObj[0].user.screen.height + "," + experimentObj[0].noticed + "," + experimentObj[0].timesFeedback + "\n";
         });
       });
       res.send(out);
@@ -124,17 +124,17 @@ app.get('/experiments/:id/trials', function (req, res) {
 app.get('/experiments/:id/trials/:user', function (req, res) {
   var id = req.params.id;
   var user = req.params.user;
-  var out = "userId,id,x,y,t,manipulated,detected,switched,rating,rt,right,type,handedness\n";
+  var out = "userId,id,x,y,t,manipulated,detected,switched,rating,rt,right,type,handedness,screenHeight,noticed,noticedNr\n";
   res.set({'Content-Disposition':'attachment; filename="'+user+'.csv"'});
 
   Experiment.find({'experimentId': id, 'userId': user, 'completed': true}, function(err, experimentObj) {
 
-    Trial.find({'experimentId': id, 'target': true, 'data.mouseOut': false, 'userId': user}, function(err, trials) {
+    Trial.find({'experimentId': id, 'target': true, 'userId': user}, function(err, trials) {
       trials.forEach(function(trial) {
         trial.data.tracking.forEach(function(row) {
-          if(row.t > 3700) {
-            out = out + trial.userId + "," + trial.id + "," + row.x + "," + row.y + "," + row.t + "," + trial.manipulated + "," + trial.data.detected + "," + trial.data.switched + "," + trial.data.rating + "," + trial.data.timing.choice + "," + trial.data.choice + "," + trial.type + "," + experimentObj[0].user.hand + "\n";
-          }
+          //if(row.t > 3700) {
+            out = out + trial.userId + "," + trial.id + "," + row.x + "," + row.y + "," + row.t + "," + trial.manipulated + "," + trial.data.detected + "," + trial.data.switched + "," + trial.data.rating + "," + trial.data.timing.choice + "," + trial.data.choice + "," + trial.type + "," + experimentObj[0].user.hand + "," + experimentObj[0].user.screen.height + "," + experimentObj[0].noticed + "," + experimentObj[0].timesFeedback + "\n";
+          //}
         });
       });
 
