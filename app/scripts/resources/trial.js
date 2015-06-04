@@ -121,8 +121,13 @@ angular.module('mismatchResources').factory('trial', ['mouseTracking', '$q', '$t
           }
 
           trial.showScale = false;
-          trial.showFeedback = true;
-          trial.waiting = 0;
+
+          trial.waiting = 2000;
+          $timeout(function() {
+            trial.showFeedback = true;
+            trial.waiting = 0;
+          }, 2000)
+
         }, waitingTime);
 
 

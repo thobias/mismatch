@@ -82,7 +82,6 @@ button {
   width: 1000px;
   height: 600px;
   position: relative;
-  margin: 0 auto;
 }
 .l-center {
   display: block;
@@ -221,7 +220,7 @@ button {
   margin: 0 auto;
   height: 1em;
   top:8em; left:40%; right:40%;
-  position: fixed;
+  position: absolute;
   transition:0.2s;
   border: 1px solid #ccc;
   border-radius: 0.5em;

@@ -32,6 +32,7 @@ angular.module('mismatchServices').factory('mouseTracking', ['$q', function($q) 
           tracker.position.x = event.clientX;
           tracker.position.y = event.clientY;
 
+
           deltaTime = window.performance.now();
           deltaSamples++;
         }
