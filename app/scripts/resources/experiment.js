@@ -16,7 +16,7 @@ angular.module('mismatchResources').factory('experiment', ['$http', 'trial', fun
 
   // Generate user and experiment id
   var userId = Date.now() + Random.uuid4(engine),
-      experimentId = 20150604;
+      experimentId = 2015060402;
 
   console.log(experimentId);
 
